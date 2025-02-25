@@ -104,5 +104,5 @@ MonoBehaviour:
   canvasGroup: {fileID: 6227445792078709557}
   fadeOut: 0
   fadeIn: 0
-  TimeToFade: 0
+  TimeToFade: 0.1
   SceneGoingTo: 
