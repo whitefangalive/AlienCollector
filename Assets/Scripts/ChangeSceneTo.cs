@@ -9,7 +9,11 @@ public class ChangeSceneTo : MonoBehaviour
     
     public void ChangeScene(string SceneName) 
     {
-        playAudioClip(Resources.Load<AudioClip>("ButtonPress"));
+        if (IsInScene("Station"))
+        {
+            //GameObject.Find("SaveState").GetComponent<SaveManager>().saveData();
+        }
+        //playAudioClip(Resources.Load<AudioClip>("ButtonPress"));
         if (!fade)
         {
             SceneManager.LoadScene(SceneName);
@@ -32,5 +36,33 @@ public class ChangeSceneTo : MonoBehaviour
         obj.AddComponent<dontDestroyOnLoad>();
         newSource.clip = clip;
         newSource.Play();
+    }
+
+    private bool IsInScene(string sceneName)
+    {
+        Scene ddol = SceneManager.GetSceneByName("DontDestroyOnLoad");
+        if (ddol == null)
+        {
+            return SceneManager.GetSceneAt(0).name == sceneName;
+        }
+        int dontDestroySceneIndex = ddol.buildIndex;
+
+        // Iterate through all loaded scenes
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+            if (scene.buildIndex != dontDestroySceneIndex)
+            {
+                if (scene.name == sceneName)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 }
