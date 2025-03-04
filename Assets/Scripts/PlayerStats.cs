@@ -15,6 +15,7 @@ public class PlayerStats : MonoBehaviour
     //to be saved
     public Dictionary<string, string> PlacematDecorations = new Dictionary<string, string>();
     public int Scrap;
+    public List<string> Cows = new List<string>();
 
     void OnApplicationPause(bool pauseStatus)
     {

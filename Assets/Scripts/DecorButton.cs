@@ -24,6 +24,12 @@ public class DecorButton : MonoBehaviour
         placementManager.CurrentlyPlacing = true;
     }
 
+    public void triggerCowPlacement()
+    {
+        placementManager.ObjectToPlace = ContainedObject;
+        placementManager.CurrentlyPlacingCow = true;
+    }
+
 
 
 

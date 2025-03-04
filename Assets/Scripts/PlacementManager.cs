@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlacementManager : MonoBehaviour
 {
     public bool CurrentlyPlacing = false;
+    public bool CurrentlyPlacingCow = false;
     public GameObject ObjectToPlace;
     // Start is called before the first frame update
 }
