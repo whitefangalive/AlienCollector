@@ -29,5 +29,6 @@ public class LoadInScene : MonoBehaviour
     {
         ps.PlacematDecorations = save.placematDecorations;
         ps.Scrap = save.scrap;
+        ps.Cows = save.cows;
     }
 }

@@ -10,7 +10,7 @@ public class RandomDirection : MonoBehaviour
     public Vector2 vel = new Vector2();
     private void go ()
     {
-        float rand = Random.Range(-2, 1);
+        float rand = Random.Range(-2.0f, 1.0f);
         rb.AddForce(new Vector2(100 * rand, -15));
     }
     // Start is called before the first frame update
@@ -23,14 +23,15 @@ public class RandomDirection : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -1.5f, 1.5f), Mathf.Clamp(rb.velocity.y, -1.5f, 1.5f), 0);
         vel = rb.velocity;
         if (Mathf.Abs(rb.velocity.x) < 0.1)
         {
-            rb.velocity = new Vector2(Random.Range(1, 3), rb.velocity.y);
+            rb.velocity = new Vector2(Random.Range(1.2f, 1.3f), rb.velocity.y);
         } 
         else if (Mathf.Abs(rb.velocity.y) < 0.1)
         {
-            rb.velocity = new Vector2(rb.velocity.x, Random.Range(1, 3));
+            rb.velocity = new Vector2(rb.velocity.x, Random.Range(1.2f, 1.3f));
         }
     }
 }

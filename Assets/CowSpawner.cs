@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CowSpawner : MonoBehaviour
 {
-    public PlacementManager placementManager;
+    private PlacementManager placementManager;
     private PlayerStats playerStats;
+
+    private bool once = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,11 +17,7 @@ public class CowSpawner : MonoBehaviour
             placementManager = pmObject.GetComponent<PlacementManager>();
         }
 
-        for (int i = 0; i < playerStats.Cows.Count; i++)
-        {
-            GameObject spawnedDecoration = Instantiate(Resources.Load<GameObject>(playerStats.Cows[i]), transform.position, transform.rotation, transform);
-            spawnedDecoration.name = placementManager.ObjectToPlace.name;
-        }
+        
 
 
     }
@@ -30,6 +28,19 @@ public class CowSpawner : MonoBehaviour
         if (playerStats == null)
         {
             playerStats = GameObject.Find("SaveState").GetComponent<PlayerStats>();
+        } else
+        {
+            if (once)
+            {
+                for (int i = 0; i < playerStats.Cows.Count; i++)
+                {
+                    Debug.Log("Starting cowSPawner" + playerStats.Cows[i]);
+                    GameObject spawnedDecoration = Instantiate(Resources.Load<GameObject>(playerStats.Cows[i]), transform.position, transform.rotation, transform);
+                    spawnedDecoration.name = playerStats.Cows[i];
+                    
+                }
+                once = false;
+            }
         }
 
         if (placementManager != null && placementManager.CurrentlyPlacingCow)
@@ -38,10 +49,6 @@ public class CowSpawner : MonoBehaviour
             spawnedDecoration.name = placementManager.ObjectToPlace.name;
             playerStats.Cows.Add(spawnedDecoration.name);
             placementManager.CurrentlyPlacingCow = false;
-        } else
-        {
-
-
         }
     }
 }

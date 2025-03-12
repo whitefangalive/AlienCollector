@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class PlayerStats : MonoBehaviour
     public Dictionary<string, string> PlacematDecorations = new Dictionary<string, string>();
     public int Scrap;
     public List<string> Cows = new List<string>();
+    // Time in play, Object attached to, alien name
+    public List<Tuple<float, int, string>> Aliens = new List<Tuple<float, int, string>>();
 
     void OnApplicationPause(bool pauseStatus)
     {
