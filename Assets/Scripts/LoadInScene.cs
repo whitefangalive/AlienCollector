@@ -5,6 +5,8 @@ using UnityEngine;
 public class LoadInScene : MonoBehaviour
 {
     private PlayerStats ps;
+    public AlienSpawner spawner;
+    public bool needsSpawnAlien = false;
     
     public void setupScene()
     {
@@ -12,6 +14,7 @@ public class LoadInScene : MonoBehaviour
         if (pso != null)
         {
             ps = pso.GetComponent<PlayerStats>();
+            spawner = pso.GetComponent<AlienSpawner>();
         }
         GameObject saveManager = GameObject.Find("SaveState");
         if (saveManager != null)
@@ -19,6 +22,7 @@ public class LoadInScene : MonoBehaviour
 
             unpackData(SaveManager.loadData());
             ps.InitialLoaded = true;
+            needsSpawnAlien = true;
         }
     }
     private void Awake()
@@ -30,5 +34,6 @@ public class LoadInScene : MonoBehaviour
         ps.PlacematDecorations = save.placematDecorations;
         ps.Scrap = save.scrap;
         ps.Cows = save.cows;
+        ps.Aliens = save.aliens;
     }
 }

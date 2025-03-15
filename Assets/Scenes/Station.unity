@@ -1354,6 +1354,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28a092180d12144eb4e440a111db5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawner: {fileID: 0}
+  needsSpawnAlien: 0
 --- !u!4 &540827742
 Transform:
   m_ObjectHideFlags: 0
@@ -6790,8 +6792,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ae5e88d68204c44b625a18bc8cf3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _screenPosition: {x: 0, y: 0, z: 0}
-  _screenPositionOrigin: {x: 0, y: 0, z: 0}
+  MousePosition: {x: 0, y: 0, z: 0}
+  MousePositionOrigin: {x: 0, y: 0, z: 0}
   positionDifference: {x: 0, y: 0, z: 0}
   cameraPositionOrigin: {x: 0, y: 0}
   speed: 100
@@ -8170,7 +8172,7 @@ GameObject:
   - component: {fileID: 1773098437}
   - component: {fileID: 1773098440}
   m_Layer: 5
-  m_Name: PlaceMat
+  m_Name: PlaceMat1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

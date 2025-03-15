@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public bool InitialLoaded = false;
+    //I need to calculate time since you closed the app, gotten when app opens
+
     private void Update()
     {
         if (InitialLoaded == false)
@@ -17,8 +19,9 @@ public class PlayerStats : MonoBehaviour
     public Dictionary<string, string> PlacematDecorations = new Dictionary<string, string>();
     public int Scrap;
     public List<string> Cows = new List<string>();
-    // Time in play, Object attached to, alien name
-    public List<Tuple<float, int, string>> Aliens = new List<Tuple<float, int, string>>();
+    // time when to despawn, Object attached to, alien name
+    public List<Tuple<float, string, string>> Aliens = new List<Tuple<float, string, string>>();
+    // DateTime.Now.Ticks; the alien will have a time when it is supposed to despawn, say it will leave at 12
 
     void OnApplicationPause(bool pauseStatus)
     {
@@ -30,5 +33,7 @@ public class PlayerStats : MonoBehaviour
         SaveManager.saveData(this);
     }
 
+
+    
 
 }

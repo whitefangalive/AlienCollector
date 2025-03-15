@@ -51,14 +51,19 @@ public class PlacematScript : MonoBehaviour
         if (playerStats.PlacematDecorations.ContainsKey(transform.gameObject.name))
         {
             string ResourceName = playerStats.PlacematDecorations[transform.gameObject.name];
-            if (ResourceName != null && SpawnedDecoration == null)
+            if (ResourceName != null && SpawnedDecoration == null && Resources.Load<GameObject>("Decor/" + ResourceName) != null)
             {
-                Debug.Log("Tried to load: " + ResourceName);
                 SpawnedDecoration = Instantiate(Resources.Load<GameObject>("Decor/" + ResourceName), transform.position, transform.rotation, transform);
+                SpawnedDecoration.name = ResourceName;
+            }
+            //needs to be done after loading in placemat decor
+            LoadInScene loader = GameObject.Find("LoadIn").GetComponent<LoadInScene>();
+            if (loader.needsSpawnAlien)
+            {
+                loader.spawner.SpawnAnyAlien();
+                loader.needsSpawnAlien = false;
             }
         }
-        
-        
     }
 
     public void placeHere()

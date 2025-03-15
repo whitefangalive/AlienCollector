@@ -34,7 +34,6 @@ public class CowSpawner : MonoBehaviour
             {
                 for (int i = 0; i < playerStats.Cows.Count; i++)
                 {
-                    Debug.Log("Starting cowSPawner" + playerStats.Cows[i]);
                     GameObject spawnedDecoration = Instantiate(Resources.Load<GameObject>(playerStats.Cows[i]), transform.position, transform.rotation, transform);
                     spawnedDecoration.name = playerStats.Cows[i];
                     
