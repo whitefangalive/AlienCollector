@@ -936,7 +936,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnedDecoration: {fileID: 0}
-  AlienAttached: {fileID: 0}
 --- !u!114 &324163083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1230,7 +1229,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnedDecoration: {fileID: 0}
-  AlienAttached: {fileID: 0}
 --- !u!114 &501863181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1423,7 +1421,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnedDecoration: {fileID: 0}
-  AlienAttached: {fileID: 0}
 --- !u!114 &545770502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1570,7 +1567,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnedDecoration: {fileID: 0}
-  AlienAttached: {fileID: 0}
 --- !u!114 &568601616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7704,7 +7700,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnedDecoration: {fileID: 0}
-  AlienAttached: {fileID: 0}
 --- !u!114 &1562802976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8304,7 +8299,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnedDecoration: {fileID: 0}
-  AlienAttached: {fileID: 0}
 --- !u!1 &1847985436
 GameObject:
   m_ObjectHideFlags: 0
@@ -8612,7 +8606,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnedDecoration: {fileID: 0}
-  AlienAttached: {fileID: 0}
 --- !u!114 &1940201729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8839,7 +8832,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnedDecoration: {fileID: 0}
-  AlienAttached: {fileID: 0}
 --- !u!114 &1987156056
 MonoBehaviour:
   m_ObjectHideFlags: 0

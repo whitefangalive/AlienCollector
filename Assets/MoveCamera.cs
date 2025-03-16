@@ -16,22 +16,22 @@ public class MoveCamera : MonoBehaviour
         cameraPositionOrigin = transform.position;
         positionDifference = Vector2.zero;
     }
-    private void FixedUpdate()
+    private void Update()
     {
         touchControls();
     }
     private void touchControls()
     {
         // CHANGE THIS BEFORE MOBILE RELEASE
-        if (Input.GetMouseButtonDown(0))
-        {
-            MousePositionOrigin = new Vector3(Input.mousePosition.x, Input.mousePosition.y);
-            cameraPositionOrigin = transform.position;
-        }
+        
         if (Input.GetMouseButton(0))
         {
             MousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y);
-            
+            if (Input.GetMouseButtonDown(0))
+            {
+                MousePositionOrigin = new Vector3(Input.mousePosition.x, Input.mousePosition.y);
+                cameraPositionOrigin = transform.position;
+            }
             positionDifference = MousePositionOrigin - MousePosition;
         } 
         else if (Input.touchCount > 0)

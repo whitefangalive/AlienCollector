@@ -7,68 +7,52 @@ using UnityEngine;
 public class AlienSpawner : MonoBehaviour
 {
     public PlayerStats ps;
-    public float currentTime;
-    private GameObject createdAlien;
+
     // Start is called before the first frame update
     void Start()
     {
         ps = GetComponent<PlayerStats>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        currentTime = DateTime.Now.Ticks;
-        //DespawnDeadAliens();
-    }
-
-    private void DespawnDeadAliens()
-    {
-        foreach (Tuple<float, string, string> alien in ps.Aliens)
-        {
-            if (alien.Item1 >= currentTime)
-            {
-                Destroy(createdAlien);
-            }
-        }
-    }
-    public void SpawnAnyAlien()
+    public void SpawnAnyAlien(GameObject decor)
     {
         
         if (ps.Cows.Count > 0)
         {
-            if (ps.PlacematDecorations.Count > 0)
+            if (decor != null)
             {
-                Debug.Log("Spawned Aliens");
-                int rand = UnityEngine.Random.Range(0, ps.PlacematDecorations.Count);
-                GameObject decor = GameObject.Find(ps.PlacematDecorations.ElementAt(rand).Value);
-                
-                if (decor != null)
+                DecorData data = decor.GetComponent<DecorData>();
+                if (data.AlienAttached == null)
                 {
-                    DecorData data = decor.GetComponent<DecorData>();
+                    int randAlien = -1;
                     if (false/**is by the moon*/)
                     {
-
+#pragma warning disable CS0162 // Unreachable code detected
+                        randAlien = UnityEngine.Random.Range(0, data.PossibleAliensToSpawnMoon.Count);
+#pragma warning restore CS0162 // Unreachable code detected
                     }
                     else
                     {
-                        int randAlien = UnityEngine.Random.Range(0, data.PossibleAliensToSpawn.Count);
-
-                        createdAlien = Instantiate(data.PossibleAliensToSpawn[randAlien],
+                        randAlien = UnityEngine.Random.Range(0, data.PossibleAliensToSpawn.Count);
+                    }
+                    if (GameObject.Find(data.PossibleAliensToSpawn[randAlien].name) == null)
+                    {
+                        Debug.Log("Spawned Aliens");
+                        ps.TimeTillCanSpawnAnAlien = UnixTime.GetUnixTime(DateTime.Now.AddMinutes(4));
+                        GameObject createdAlien = Instantiate(data.PossibleAliensToSpawn[randAlien],
                             decor.transform.position,
                             decor.transform.rotation, decor.transform);
 
                         createdAlien.name = data.PossibleAliensToSpawn[randAlien].name;
-                        string scientificNotationString = "3.6e+12";
-                        float floatValue = float.Parse(scientificNotationString);
 
-                        Tuple<float, string, string> alien = new Tuple<float, string, string>(DateTime.Now.Ticks +
-                            floatValue + UnityEngine.Random.Range(-10000000, 10000000), decor.name, createdAlien.name);
+
+                        data.AlienAttached = createdAlien;
+                        long timeToGo = UnixTime.GetUnixTime(DateTime.Now.AddMinutes(30));
+                        Tuple<long, string, string> alien = new Tuple<long, string, string>(timeToGo, decor.name, createdAlien.name);
                         ps.Aliens.Add(alien);
+                        AlienData adata = createdAlien.GetComponent<AlienData>();
+                        adata.decorAttachedTo = data;
                     }
-                } else
-                {
-                    Debug.Log("Unable to find " + ps.PlacematDecorations.ElementAt(rand).Value);
                 }
             }
         }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class LoadInScene : MonoBehaviour
 {
     private PlayerStats ps;
-    public AlienSpawner spawner;
+    [HideInInspector]public AlienSpawner spawner;
     public bool needsSpawnAlien = false;
     
     public void setupScene()
@@ -35,5 +35,6 @@ public class LoadInScene : MonoBehaviour
         ps.Scrap = save.scrap;
         ps.Cows = save.cows;
         ps.Aliens = save.aliens;
+        ps.TimeTillCanSpawnAnAlien = save.timeTillCanSpawnAnAlien;
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,15 +7,12 @@ using UnityEngine.UI;
 public class PlacematScript : MonoBehaviour
 {
     public GameObject SpawnedDecoration;
-    public GameObject AlienAttached;
     private PlacementManager placementManager;
     private Image image;
     private PlayerStats playerStats;
     // Start is called before the first frame update
     void Start()
     {
-        
-        
         image = GetComponent<Image>();
     }
 
@@ -33,6 +31,7 @@ public class PlacematScript : MonoBehaviour
                 placementManager = placeOjb.GetComponent<PlacementManager>();
             }
         }
+        //Spawn in yellow mats
         if (placementManager != null)
         {
             if (placementManager.CurrentlyPlacing)
@@ -55,22 +54,59 @@ public class PlacematScript : MonoBehaviour
             {
                 SpawnedDecoration = Instantiate(Resources.Load<GameObject>("Decor/" + ResourceName), transform.position, transform.rotation, transform);
                 SpawnedDecoration.name = ResourceName;
-            }
-            //needs to be done after loading in placemat decor
-            LoadInScene loader = GameObject.Find("LoadIn").GetComponent<LoadInScene>();
-            if (loader.needsSpawnAlien)
-            {
-                loader.spawner.SpawnAnyAlien();
-                loader.needsSpawnAlien = false;
+
+                RespawnAlien();
+
+                //needs to be done after loading in placemat decor
+                LoadInScene loader = GameObject.Find("LoadIn").GetComponent<LoadInScene>();
+                int rand = UnityEngine.Random.Range(0, 2);
+                if (UnixTime.GetUnixTime(DateTime.Now) > playerStats.TimeTillCanSpawnAnAlien)
+                {
+                    if (SpawnedDecoration != null && rand == 1)
+                    {
+                        Debug.Log("AlienTime");
+                        if (loader.spawner != null)
+                        {
+                            loader.spawner.SpawnAnyAlien(SpawnedDecoration);
+                        }
+                    }
+                } else
+                {
+                    Debug.Log("Time Before Can spawn next alien: " + (playerStats.TimeTillCanSpawnAnAlien - UnixTime.GetUnixTime(DateTime.Now)).ToString());
+                }
+                
             }
         }
     }
 
+    //when the alien exists on one of the decorations but isn't spawned on it
+    private void RespawnAlien()
+    {
+        if (SpawnedDecoration != null)
+        {
+            DecorData data = SpawnedDecoration.GetComponent<DecorData>();
+            if (data.AlienAttached == null)
+            {
+                foreach (Tuple<long, string, string> alien in playerStats.Aliens)
+                {
+                    if (alien.Item2 == SpawnedDecoration.name)
+                    {
+                        GameObject alienObject = Resources.Load<GameObject>("Aliens/" + alien.Item3);
+                        data.AlienAttached = Instantiate(alienObject,
+                                SpawnedDecoration.transform.position,
+                                SpawnedDecoration.transform.rotation, SpawnedDecoration.transform);
+
+                        data.AlienAttached.name = alienObject.name;
+                        data.AlienAttached.GetComponent<AlienData>().decorAttachedTo = data;
+                    }
+                }
+            }
+        }
+    }
     public void placeHere()
     {
         if (placementManager != null && placementManager.CurrentlyPlacing)
         {
-            
             //detach current alien on this placemat
             if (playerStats.PlacematDecorations.ContainsKey(transform.gameObject.name))
             {
@@ -86,6 +122,7 @@ public class PlacematScript : MonoBehaviour
                 Destroy(SpawnedDecoration);
             }
             SpawnedDecoration = Instantiate(Resources.Load<GameObject>("Decor/" + ResourceName), transform.position, transform.rotation, transform);
+            SpawnedDecoration.name = ResourceName;
             placementManager.ObjectToPlace = null;
             placementManager.CurrentlyPlacing = false;
         }

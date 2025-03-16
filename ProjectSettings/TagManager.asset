@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - SaveMe
+  - Cow
   layers:
   - Default
   - TransparentFX

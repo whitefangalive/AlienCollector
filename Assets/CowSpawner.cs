@@ -16,10 +16,6 @@ public class CowSpawner : MonoBehaviour
         {
             placementManager = pmObject.GetComponent<PlacementManager>();
         }
-
-        
-
-
     }
 
     // Update is called once per frame
@@ -28,7 +24,8 @@ public class CowSpawner : MonoBehaviour
         if (playerStats == null)
         {
             playerStats = GameObject.Find("SaveState").GetComponent<PlayerStats>();
-        } else
+        } 
+        else
         {
             if (once)
             {
@@ -40,14 +37,14 @@ public class CowSpawner : MonoBehaviour
                 }
                 once = false;
             }
-        }
-
-        if (placementManager != null && placementManager.CurrentlyPlacingCow)
-        {
-            GameObject spawnedDecoration = Instantiate(placementManager.ObjectToPlace, transform.position, transform.rotation, transform);
-            spawnedDecoration.name = placementManager.ObjectToPlace.name;
-            playerStats.Cows.Add(spawnedDecoration.name);
-            placementManager.CurrentlyPlacingCow = false;
+            if (placementManager != null && placementManager.CurrentlyPlacingCow)
+            {
+                GameObject spawnedCow = Instantiate(placementManager.ObjectToPlace, transform.position, transform.rotation, transform);
+                spawnedCow.name = placementManager.ObjectToPlace.name;
+                playerStats.Cows.Add(spawnedCow.name);
+                once = false;
+                placementManager.CurrentlyPlacingCow = false;
+            }
         }
     }
 }

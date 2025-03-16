@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4777147436507048986
+--- !u!1001 &3263829061798693200
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 750719951444153378, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 894c5c173a91b18459e45e93bdc2c6de, type: 3}
+    - target: {fileID: 1160440101320685433, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
+      propertyPath: m_Name
+      value: InvayturHead
+      objectReference: {fileID: 0}
     - target: {fileID: 4173798016212874969, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -88,9 +96,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6273436187069565593, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: df6ce5c36015c864daa5c0b1d6d9caf0, type: 3}
+    - target: {fileID: 7081750977297907611, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
+      propertyPath: m_Name
+      value: SuitSprite
+      objectReference: {fileID: 0}
     - target: {fileID: 7137485010300590556, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
       propertyPath: m_Name
-      value: SaltLampShadow Variant
+      value: InvayturSpaceSuit Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7897285846408496950, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.22639371
+      objectReference: {fileID: 0}
+    - target: {fileID: 7897285846408496950, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.22639371
+      objectReference: {fileID: 0}
+    - target: {fileID: 7897285846408496950, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.22639371
+      objectReference: {fileID: 0}
+    - target: {fileID: 7897285846408496950, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7897285846408496950, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 21.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

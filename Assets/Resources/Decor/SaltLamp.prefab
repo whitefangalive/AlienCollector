@@ -90,8 +90,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PossibleAliensToSpawn:
-  - {fileID: 7137485010300590556, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
+  - {fileID: 2397786943863649734, guid: 1f75b0f9e0054f145a9592585f42da4a, type: 3}
   PossibleAliensToSpawnMoon: []
+  AlienAttached: {fileID: 0}
 --- !u!70 &8759361229780736773
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

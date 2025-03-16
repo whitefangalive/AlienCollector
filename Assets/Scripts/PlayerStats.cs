@@ -20,8 +20,9 @@ public class PlayerStats : MonoBehaviour
     public int Scrap;
     public List<string> Cows = new List<string>();
     // time when to despawn, Object attached to, alien name
-    public List<Tuple<float, string, string>> Aliens = new List<Tuple<float, string, string>>();
-    // DateTime.Now.Ticks; the alien will have a time when it is supposed to despawn, say it will leave at 12
+    public List<Tuple<long, string, string>> Aliens = new List<Tuple<long, string, string>>();
+    // DateTime.Now in unix; the alien will have a time when it is supposed to despawn, say it will leave at 12
+    public long TimeTillCanSpawnAnAlien = 0;
 
     void OnApplicationPause(bool pauseStatus)
     {
