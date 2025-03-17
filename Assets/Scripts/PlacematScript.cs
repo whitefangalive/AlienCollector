@@ -97,7 +97,10 @@ public class PlacematScript : MonoBehaviour
                                 SpawnedDecoration.transform.rotation, SpawnedDecoration.transform);
 
                         data.AlienAttached.name = alienObject.name;
-                        data.AlienAttached.GetComponent<AlienData>().decorAttachedTo = data;
+                        if (data.AlienAttached.GetComponent<AlienData>() != null)
+                        {
+                            data.AlienAttached.GetComponent<AlienData>().decorAttachedTo = data;
+                        }
                     }
                 }
             }
