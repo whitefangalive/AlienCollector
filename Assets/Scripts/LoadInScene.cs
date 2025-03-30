@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class LoadInScene : MonoBehaviour
@@ -19,8 +20,11 @@ public class LoadInScene : MonoBehaviour
         GameObject saveManager = GameObject.Find("SaveState");
         if (saveManager != null)
         {
-
-            unpackData(SaveManager.loadData());
+            string path = Application.persistentDataPath + "/game.save";
+            if (File.Exists(path))
+            {
+                unpackData(SaveManager.loadData());
+            }
             ps.InitialLoaded = true;
             needsSpawnAlien = true;
         }

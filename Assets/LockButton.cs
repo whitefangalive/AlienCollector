@@ -20,6 +20,10 @@ public class LockButton : MonoBehaviour
 
         if (lockOnOwned)
         {
+            if (ps.OwnedItems == null)
+            {
+                ps.OwnedItems = new List<string>();
+            }
             if (ps.OwnedItems.Contains(decor.ContainedObject.name))
             {
                 lockButton();

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -34,6 +35,10 @@ public class DecorButton : MonoBehaviour
         if (ps.Scrap >= cost)
         {
             ps.Scrap -= cost;
+            if (ps.OwnedItems == null)
+            {
+                ps.OwnedItems = new List<string>();
+            }
             if (!ps.OwnedItems.Contains(ContainedObject.name))
             {
                 ps.OwnedItems.Add(ContainedObject.name);
