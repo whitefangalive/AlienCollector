@@ -1,0 +1,67 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class InventorySpawner : MonoBehaviour
+{
+    public Transform Item1;
+    public Transform Item2;
+    public GameObject TemplateCow;
+    public GameObject TemplateItem;
+
+    private PlayerStats ps;
+    private Vector3 distance;
+    public List<GameObject> items = new List<GameObject>();
+    // Start is called before the first frame update
+    void Start()
+    {
+        Item1.gameObject.SetActive(false);
+        Item2.gameObject.SetActive(false);
+        GameObject pso = GameObject.Find("SaveState");
+        if (pso != null)
+        {
+            ps = pso.GetComponent<PlayerStats>();
+        }
+        distance = Item1.transform.position - Item2.transform.position;
+
+        int fullDistanceDown = 0;
+        for (int i = 0; i < ps.OwnedCows.Count; i++)
+        {
+            if (ps.OwnedCows.ElementAt(i).Value > 0)
+            {
+                Debug.Log("spawning cow");
+                items.Add(Instantiate(TemplateCow, Item1.position - (distance * i), Item1.rotation, transform));
+                GameObject cowObject = Resources.Load<GameObject>(ps.OwnedCows.ElementAt(i).Key);
+                if (cowObject != null)
+                {
+                    items[i].SetActive(true);
+                    items[i].GetComponentInChildren<DecorButton>().ContainedObject = cowObject;
+                }
+                else
+                {
+                    Debug.Log("Unable to find " + ps.OwnedCows.ElementAt(i).Key);
+                }
+                fullDistanceDown++;
+            }
+        }
+
+        for (int i = 0; i < ps.OwnedItems.Count; i++)
+        {
+            Debug.Log("spawning Item");
+            items.Add(Instantiate(TemplateItem, Item1.position - (distance * fullDistanceDown), Item1.rotation, transform));
+            GameObject itemObject = Resources.Load<GameObject>("Decor/" + ps.OwnedItems[i]);
+            items[fullDistanceDown].SetActive(true);
+            items[fullDistanceDown].GetComponentInChildren<DecorButton>().ContainedObject = itemObject;
+            fullDistanceDown++;
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}

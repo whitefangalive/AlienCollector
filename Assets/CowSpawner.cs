@@ -32,10 +32,16 @@ public class CowSpawner : MonoBehaviour
             {
                 for (int i = 0; i < playerStats.Cows.Count; i++)
                 {
-                    GameObject spawnedDecoration = Instantiate(Resources.Load<GameObject>(playerStats.Cows[i].Item1), transform.position, transform.rotation, transform);
-                    spawnedDecoration.name = playerStats.Cows[i].Item1;
-                    Debug.Log(playerStats.Cows[i].Item1.ToString());
-                    spawnedDecoration.GetComponent<CowData>().risk = playerStats.Cows[i].Item2;
+                    if (Resources.Load<GameObject>(playerStats.Cows[i].Item1) != null) 
+                    {
+                        GameObject spawnedDecoration = Instantiate(Resources.Load<GameObject>(playerStats.Cows[i].Item1), transform.position, transform.rotation, transform);
+                        spawnedDecoration.name = playerStats.Cows[i].Item1;
+                        spawnedDecoration.GetComponent<CowData>().risk = playerStats.Cows[i].Item2;
+                    } else
+                    {
+                        Debug.Log("Could not load in resource: " + playerStats.Cows[i].Item1);
+                    }
+                    
                 }
                 once = false;
             }

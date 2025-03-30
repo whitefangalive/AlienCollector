@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 12666605}
   - component: {fileID: 12666604}
   - component: {fileID: 12666603}
+  - component: {fileID: 12666606}
   m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
@@ -205,7 +206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 12666604}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 12666606}
+        m_TargetAssemblyTypeName: ChangeSceneTo, Assembly-CSharp
+        m_MethodName: ChangeScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Shop
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &12666604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +257,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12666601}
   m_CullTransparentMesh: 1
+--- !u!114 &12666606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12666601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aba181efaac965548a67c19c0bde2c5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fade: 1
 --- !u!1 &38139559
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,7 +34,15 @@ public class DecorButton : MonoBehaviour
         if (ps.Scrap >= cost)
         {
             ps.Scrap -= cost;
-
+            if (!ps.OwnedItems.Contains(ContainedObject.name))
+            {
+                ps.OwnedItems.Add(ContainedObject.name);
+                LockButton lbo = GetComponent<LockButton>();
+                if (lbo != null)
+                {
+                    lbo.lockButton();
+                }
+            }
 
         }
     }
@@ -44,7 +53,7 @@ public class DecorButton : MonoBehaviour
             ps.Scrap -= cost;
             if (ps.OwnedCows.ContainsKey(ContainedObject.name))
             {
-                ps.OwnedCows.Add(ContainedObject.name, ps.OwnedCows[ContainedObject.name] + 1);
+                ps.OwnedCows[ContainedObject.name] += 1;
             }
             else
             {
@@ -64,5 +73,6 @@ public class DecorButton : MonoBehaviour
     {
         placementManager.ObjectToPlace = ContainedObject;
         placementManager.CurrentlyPlacingCow = true;
+        ps.OwnedCows[ContainedObject.name] = ps.OwnedCows[ContainedObject.name] - 1;
     }
 }

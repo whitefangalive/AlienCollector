@@ -11,10 +11,6 @@ public class PlayerStats : MonoBehaviour
 
     private void Update()
     {
-        foreach(Tuple<string, int> cw in Cows)
-        {
-            Debug.Log(cw.Item2);
-        }
         if (InitialLoaded == false)
         {
             GameObject.Find("LoadIn").GetComponent<LoadInScene>().setupScene();
@@ -30,6 +26,7 @@ public class PlayerStats : MonoBehaviour
     public long TimeTillCanSpawnAnAlien = 0;
     //id, amount of cows owned;
     public Dictionary<string, int> OwnedCows = new Dictionary<string, int>();
+    public List<string> OwnedItems = new List<string>();
 
     void OnApplicationPause(bool pauseStatus)
     {
