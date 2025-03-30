@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CowSpawner : MonoBehaviour
@@ -31,19 +32,20 @@ public class CowSpawner : MonoBehaviour
             {
                 for (int i = 0; i < playerStats.Cows.Count; i++)
                 {
-                    GameObject spawnedDecoration = Instantiate(Resources.Load<GameObject>(playerStats.Cows[i]), transform.position, transform.rotation, transform);
-                    spawnedDecoration.name = playerStats.Cows[i];
-                    
+                    GameObject spawnedDecoration = Instantiate(Resources.Load<GameObject>(playerStats.Cows[i].Item1), transform.position, transform.rotation, transform);
+                    spawnedDecoration.name = playerStats.Cows[i].Item1;
+                    Debug.Log(playerStats.Cows[i].Item1.ToString());
+                    spawnedDecoration.GetComponent<CowData>().risk = playerStats.Cows[i].Item2;
                 }
                 once = false;
             }
             if (placementManager != null && placementManager.CurrentlyPlacingCow)
             {
-                GameObject spawnedCow = Instantiate(placementManager.ObjectToPlace, transform.position, transform.rotation, transform);
-                spawnedCow.name = placementManager.ObjectToPlace.name;
-                playerStats.Cows.Add(spawnedCow.name);
                 once = false;
                 placementManager.CurrentlyPlacingCow = false;
+                GameObject spawnedCow = Instantiate(placementManager.ObjectToPlace, transform.position, transform.rotation, transform);
+                spawnedCow.name = placementManager.ObjectToPlace.name;
+                playerStats.Cows.Add(new System.Tuple<string, int>(spawnedCow.name, 0));
             }
         }
     }

@@ -42,6 +42,14 @@ public class AlienData : MonoBehaviour
             if (cow != null)
             {
                 cow.GetComponent<CowData>().risk += (strength - cow.GetComponent<CowData>().defense);
+                for(int i = 0; i < ps.Cows.Count; i++)
+                {
+                    Tuple<string, int> thisCow = ps.Cows[i];
+                    if (thisCow.Item1 == cow.name)
+                    {
+                        ps.Cows[i] = new Tuple<string, int> (thisCow.Item1, cow.GetComponent<CowData>().risk);
+                    }
+                }
             }
             
             Destroy(gameObject);
