@@ -15,14 +15,15 @@ public class ClickSlidePosition : MonoBehaviour
     
     public Vector2 clampHorizontal = new Vector2();
     public Vector2 clampVertical = new Vector2();
-    public GameObject ClampObject;
+    public Transform ClampObject;
     private void Start()
     {
         myPositionOrigin = transform.position;
         positionDifference = Vector2.zero;
         if (ClampObject != null)
         {
-
+            clampHorizontal = new Vector2(myPositionOrigin.x, ClampObject.position.x);
+            clampVertical = new Vector2(myPositionOrigin.y, ClampObject.position.y);
         }
     }
     private void Update()
