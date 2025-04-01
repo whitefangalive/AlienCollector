@@ -6,6 +6,7 @@ using UnityEngine;
 public class AlienData : MonoBehaviour
 {
     public int strength = 20;
+    public int wealth = 5;
     public float despawnTime;
     public DecorData decorAttachedTo;
     public long currentTime;
@@ -50,6 +51,10 @@ public class AlienData : MonoBehaviour
                         ps.Cows[i] = new Tuple<string, int> (thisCow.Item1, cow.GetComponent<CowData>().risk);
                     }
                 }
+
+                // give scrap
+                GiftManager gm = GameObject.Find("GiftManger").GetComponent<GiftManager>();
+                gm.AlienGifts.Add(new Tuple<string, int>(thisAlien.Item2, UnityEngine.Random.Range(1 + wealth, wealth * 2)));
             }
             
             Destroy(gameObject);
