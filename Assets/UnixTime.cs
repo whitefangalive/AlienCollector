@@ -14,4 +14,8 @@ public static class UnixTime
     {
         return DateTimeOffset.FromUnixTimeSeconds(time).UtcDateTime;
     }
+    public static long GetUnixTimeMinutes(long minutes)
+    {
+        return (minutes * 60);
+    }
 }

@@ -14,6 +14,7 @@ public class SaveState
     public Dictionary<string, int> ownedCows = new Dictionary<string, int>();
     public List<string> ownedItems = new List<string>();
     public List<Tuple<string, int>> alienGifts = new List<Tuple<string, int>>();
+    public long timeLeftGame = 0;
 
     public SaveState(PlayerStats ps) 
     {
@@ -25,6 +26,7 @@ public class SaveState
         ownedCows = ps.OwnedCows;
         ownedItems = ps.OwnedItems;
         alienGifts = ps.AlienGifts;
+        timeLeftGame = ps.TimeLeftGame;
 
     }
 }

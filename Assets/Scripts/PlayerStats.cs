@@ -24,6 +24,8 @@ public class PlayerStats : MonoBehaviour
     public List<Tuple<long, string, string>> Aliens = new List<Tuple<long, string, string>>();
     // DateTime.Now in unix; the alien will have a time when it is supposed to despawn, say it will leave at 12
     public long TimeTillCanSpawnAnAlien = 0;
+    //The time it at which you closed the game last, used to determmine how
+    public long TimeLeftGame;
     //id, amount of cows owned;
     public Dictionary<string, int> OwnedCows = new Dictionary<string, int>();
     public List<string> OwnedItems = new List<string>();
@@ -32,11 +34,13 @@ public class PlayerStats : MonoBehaviour
 
     void OnApplicationPause(bool pauseStatus)
     {
+        TimeLeftGame = UnixTime.GetUnixTime(DateTime.Now);
         SaveManager.saveData(this);
     }
 
     private void OnApplicationQuit()
     {
+        TimeLeftGame = UnixTime.GetUnixTime(DateTime.Now);
         SaveManager.saveData(this);
     }
 }

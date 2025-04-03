@@ -43,5 +43,6 @@ public class LoadInScene : MonoBehaviour
         ps.OwnedCows = save.ownedCows;
         ps.OwnedItems = save.ownedItems;
         ps.AlienGifts = save.alienGifts;
+        ps.TimeLeftGame = save.timeLeftGame;
     }
 }

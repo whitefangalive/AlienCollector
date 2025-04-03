@@ -38,7 +38,7 @@ public class AlienSpawner : MonoBehaviour
                     if (GameObject.Find(data.PossibleAliensToSpawn[randAlien].name) == null)
                     {
                         Debug.Log("Spawned Aliens");
-                        ps.TimeTillCanSpawnAnAlien = UnixTime.GetUnixTime(DateTime.Now.AddMinutes(4));
+                        ps.TimeTillCanSpawnAnAlien = UnixTime.GetUnixTime(DateTime.Now.AddMinutes(14));
                         GameObject createdAlien = Instantiate(data.PossibleAliensToSpawn[randAlien],
                             decor.transform.position,
                             decor.transform.rotation, decor.transform);
@@ -47,7 +47,7 @@ public class AlienSpawner : MonoBehaviour
 
 
                         data.AlienAttached = createdAlien;
-                        long timeToGo = UnixTime.GetUnixTime(DateTime.Now.AddSeconds(10));
+                        long timeToGo = UnixTime.GetUnixTime(DateTime.Now.AddMinutes(20));
                         Tuple<long, string, string> alien = new Tuple<long, string, string>(timeToGo, decor.name, createdAlien.name);
                         ps.Aliens.Add(alien);
                         AlienData adata = createdAlien.GetComponent<AlienData>();

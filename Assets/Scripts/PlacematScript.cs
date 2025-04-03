@@ -9,19 +9,23 @@ public class PlacematScript : MonoBehaviour
     public GameObject SpawnedDecoration;
     private PlacementManager placementManager;
     private Image image;
-    private PlayerStats playerStats;
+    private PlayerStats ps;
+    private bool once = true;
     // Start is called before the first frame update
     void Start()
     {
         image = GetComponent<Image>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerStats == null)
+        if (ps == null)
         {
-            playerStats = GameObject.Find("SaveState").GetComponent<PlayerStats>();
+            ps = GameObject.Find("SaveState").GetComponent<PlayerStats>();
+            
+
         }
         if (placementManager == null)
         {
@@ -29,6 +33,7 @@ public class PlacematScript : MonoBehaviour
             if (placeOjb != null)
             {
                 placementManager = placeOjb.GetComponent<PlacementManager>();
+                
             }
         }
         //Spawn in yellow mats
@@ -47,9 +52,9 @@ public class PlacematScript : MonoBehaviour
             image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
         }
         //when the object exists in playerstats but is not spawned, then spawn it
-        if (playerStats.PlacematDecorations.ContainsKey(transform.gameObject.name))
+        if (ps.PlacematDecorations.ContainsKey(transform.gameObject.name))
         {
-            string ResourceName = playerStats.PlacematDecorations[transform.gameObject.name];
+            string ResourceName = ps.PlacematDecorations[transform.gameObject.name];
             if (ResourceName != null && SpawnedDecoration == null && Resources.Load<GameObject>("Decor/" + ResourceName) != null)
             {
                 SpawnedDecoration = Instantiate(Resources.Load<GameObject>("Decor/" + ResourceName), transform.position, transform.rotation, transform);
@@ -60,7 +65,7 @@ public class PlacematScript : MonoBehaviour
                 //needs to be done after loading in placemat decor
                 LoadInScene loader = GameObject.Find("LoadIn").GetComponent<LoadInScene>();
                 int rand = UnityEngine.Random.Range(0, 2);
-                if (UnixTime.GetUnixTime(DateTime.Now) > playerStats.TimeTillCanSpawnAnAlien)
+                if (UnixTime.GetUnixTime(DateTime.Now) > ps.TimeTillCanSpawnAnAlien)
                 {
                     if (SpawnedDecoration != null && rand == 1)
                     {
@@ -73,9 +78,82 @@ public class PlacematScript : MonoBehaviour
                     }
                 } else
                 {
-                    Debug.Log("Time Before Can spawn next alien: " + (playerStats.TimeTillCanSpawnAnAlien - UnixTime.GetUnixTime(DateTime.Now)).ToString());
+                    Debug.Log("Time Before Can spawn next alien: " + (ps.TimeTillCanSpawnAnAlien - UnixTime.GetUnixTime(DateTime.Now)).ToString());
                 }
                 
+            }
+        }
+        if (ps.TimeLeftGame > 0 && once)
+        {
+            SpawnOutOfFocus();
+            once = false;
+        }
+        
+
+    }
+
+    private void SpawnOutOfFocus()
+    {
+        Debug.Log("Time left game: " + UnixTime.GetDateTime(ps.TimeLeftGame) +
+            ", Seconds passed " + (UnixTime.GetUnixTime(DateTime.Now) - ps.TimeLeftGame).ToString() +
+            " Time since last logged on " + (UnixTime.GetUnixTime(DateTime.Now) - ps.TimeLeftGame) / UnixTime.GetUnixTimeMinutes(1) +
+            " minutes, Unix 1 min = " + UnixTime.GetUnixTimeMinutes(1));
+        int rand = UnityEngine.Random.Range(0, 2);
+        if (SpawnedDecoration != null && rand == 1)
+        {
+            //spawn aliens if gone for more then 20 minutes, spawn one for each 20
+            for (int i = 0; i < (UnixTime.GetUnixTime(DateTime.Now) - ps.TimeLeftGame) / UnixTime.GetUnixTimeMinutes(20); ++i)
+            {
+                if (ps.Cows.Count > 0)
+                {
+                    GameObject cow = null;
+                    foreach (GameObject co in GameObject.FindGameObjectsWithTag("Cow"))
+                    {
+                        if (co.GetComponent<CowData>().risk < 100)
+                        {
+                            cow = co;
+                        }
+                    }
+                    if (cow != null)
+                    {
+                        DecorData data = SpawnedDecoration.GetComponent<DecorData>();
+                        if (data.AlienAttached == null)
+                        {
+                            int randAlien = -1;
+                            if (false/**is by the moon*/)
+                            {
+#pragma warning disable CS0162 // Unreachable code detected
+                                randAlien = UnityEngine.Random.Range(0, data.PossibleAliensToSpawnMoon.Count);
+#pragma warning restore CS0162 // Unreachable code detected
+                            }
+                            else
+                            {
+                                randAlien = UnityEngine.Random.Range(0, data.PossibleAliensToSpawn.Count);
+                            }
+
+                            AlienData alienData = data.PossibleAliensToSpawn[randAlien].GetComponent<AlienData>();
+
+
+                            if (cow != null)
+                            {
+                                cow.GetComponent<CowData>().risk += (30 - cow.GetComponent<CowData>().defense);
+                                for (int j = 0; j < ps.Cows.Count; j++)
+                                {
+                                    Tuple<string, int> thisCow = ps.Cows[j];
+                                    if (thisCow.Item1 == cow.name)
+                                    {
+                                        ps.Cows[j] = new Tuple<string, int>(thisCow.Item1, cow.GetComponent<CowData>().risk);
+                                    }
+                                }
+                            }
+                            ps.AlienGifts.Add(new Tuple<string, int>(alienData.gameObject.name, UnityEngine.Random.Range(1 + alienData.wealth, alienData.wealth * 2)));
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
             }
         }
     }
@@ -88,7 +166,7 @@ public class PlacematScript : MonoBehaviour
             DecorData data = SpawnedDecoration.GetComponent<DecorData>();
             if (data.AlienAttached == null)
             {
-                foreach (Tuple<long, string, string> alien in playerStats.Aliens)
+                foreach (Tuple<long, string, string> alien in ps.Aliens)
                 {
                     if (alien.Item2 == SpawnedDecoration.name)
                     {
@@ -112,15 +190,15 @@ public class PlacematScript : MonoBehaviour
         if (placementManager != null && placementManager.CurrentlyPlacing)
         {
             //detach current alien on this placemat
-            if (playerStats.PlacematDecorations.ContainsKey(transform.gameObject.name))
+            if (ps.PlacematDecorations.ContainsKey(transform.gameObject.name))
             {
-                playerStats.PlacematDecorations[transform.gameObject.name] = placementManager.ObjectToPlace.name;
+                ps.PlacematDecorations[transform.gameObject.name] = placementManager.ObjectToPlace.name;
             } else
             {
-                playerStats.PlacematDecorations.Add(transform.gameObject.name, placementManager.ObjectToPlace.name);
+                ps.PlacematDecorations.Add(transform.gameObject.name, placementManager.ObjectToPlace.name);
             }
             
-            string ResourceName = playerStats.PlacematDecorations[transform.gameObject.name];
+            string ResourceName = ps.PlacematDecorations[transform.gameObject.name];
             if (SpawnedDecoration != null)
             {
                 Destroy(SpawnedDecoration);

@@ -42,8 +42,11 @@ public class OfferingsSpawner : MonoBehaviour
             Tuple<string, int> itemG = ps.AlienGifts[i];
             items[i].SetActive(true);
             items[i].GetComponentInChildren<OfferingsContainer>().costText.text = itemG.Item2.ToString();
-            items[i].GetComponentInChildren<OfferingsContainer>().image.sprite = Resources.Load<GameObject>("Aliens/" + itemG.Item1).GetComponent<Button>().targetGraphic.GetComponent<Image>().sprite;
-            items[i].GetComponentInChildren<OfferingsContainer>().nameText.text = itemG.Item1;
+            Debug.Log("Aliens/" + itemG.Item1);
+            GameObject alienImg = Resources.Load<GameObject>("Aliens/" + itemG.Item1);
+            
+            items[i].GetComponentInChildren<OfferingsContainer>().image.sprite = alienImg.GetComponent<Button>().targetGraphic.gameObject.GetComponent<Image>().sprite;
+            items[i].GetComponentInChildren<OfferingsContainer>().nameText.text = alienImg.GetComponent<AlienData>().alienName;
             items[i].GetComponentInChildren<OfferingsContainer>().number = i;
         }
 
