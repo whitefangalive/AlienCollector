@@ -16,7 +16,7 @@ public class AlienSpawner : MonoBehaviour
 
     public void SpawnAnyAlien(GameObject decor)
     {
-        
+        Debug.Log("SpawningAlien");
         if (ps.Cows.Count > 0)
         {
             if (decor != null)
@@ -47,7 +47,7 @@ public class AlienSpawner : MonoBehaviour
 
 
                         data.AlienAttached = createdAlien;
-                        long timeToGo = UnixTime.GetUnixTime(DateTime.Now.AddMinutes(30));
+                        long timeToGo = UnixTime.GetUnixTime(DateTime.Now.AddSeconds(10));
                         Tuple<long, string, string> alien = new Tuple<long, string, string>(timeToGo, decor.name, createdAlien.name);
                         ps.Aliens.Add(alien);
                         AlienData adata = createdAlien.GetComponent<AlienData>();

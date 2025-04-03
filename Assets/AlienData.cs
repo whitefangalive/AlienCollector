@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AlienData : MonoBehaviour
 {
+    public string alienName;
     public int strength = 20;
     public int wealth = 5;
     public float despawnTime;
@@ -12,7 +14,7 @@ public class AlienData : MonoBehaviour
     public long currentTime;
     private PlayerStats ps;
     private Tuple<long, string, string> thisAlien;
-    [HideInInspector]public long TimeToDespawnAt;
+    public long TimeToDespawnAt;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,8 +55,7 @@ public class AlienData : MonoBehaviour
                 }
 
                 // give scrap
-                GiftManager gm = GameObject.Find("GiftManger").GetComponent<GiftManager>();
-                gm.AlienGifts.Add(new Tuple<string, int>(thisAlien.Item2, UnityEngine.Random.Range(1 + wealth, wealth * 2)));
+                ps.AlienGifts.Add(new Tuple<string, int>(thisAlien.Item3, UnityEngine.Random.Range(1 + wealth, wealth * 2)));
             }
             
             Destroy(gameObject);

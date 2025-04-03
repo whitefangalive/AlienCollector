@@ -11,20 +11,20 @@ public class ClickSlidePosition : MonoBehaviour
     private Vector3 MousePositionOrigin = new Vector2();
     private Vector3 positionDifference = new Vector2();
 
+    private Vector2 fullPositionOrigin = new Vector2();
+
     private Vector2 myPositionOrigin = new Vector2();
     
     public Vector2 clampHorizontal = new Vector2();
     public Vector2 clampVertical = new Vector2();
     public Transform ClampObject;
+
+    public int AllowedBoxesToSee = 10;
     private void Start()
     {
-        myPositionOrigin = transform.position;
+        fullPositionOrigin = transform.localPosition;
+        myPositionOrigin = transform.localPosition;
         positionDifference = Vector2.zero;
-        if (ClampObject != null)
-        {
-            clampHorizontal = new Vector2(myPositionOrigin.x, ClampObject.position.x);
-            clampVertical = new Vector2(myPositionOrigin.y, ClampObject.position.y);
-        }
     }
     private void Update()
     {
@@ -39,7 +39,7 @@ public class ClickSlidePosition : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 MousePositionOrigin = new Vector3(Input.mousePosition.x, Input.mousePosition.y);
-                myPositionOrigin = transform.position;
+                myPositionOrigin = transform.localPosition;
             }
             positionDifference = MousePositionOrigin - MousePosition;
         }
@@ -49,12 +49,17 @@ public class ClickSlidePosition : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 MousePositionOrigin = new Vector3(touch.position.x, touch.position.y, 5);
-                myPositionOrigin = transform.position;
+                myPositionOrigin = transform.localPosition;
             }
             MousePosition = new Vector3(touch.position.x, touch.position.y, 5);
             positionDifference = MousePositionOrigin - MousePosition;
         }
-        transform.position = new Vector3(Mathf.Clamp(myPositionOrigin.x + ((positionDifference.x / 100) * speeds.x), clampHorizontal.x, clampHorizontal.y), 
+        if (ClampObject != null)
+        {
+            clampHorizontal = new Vector2(fullPositionOrigin.x, ClampObject.localPosition.x);
+            clampVertical = new Vector2(fullPositionOrigin.y, ClampObject.localPosition.y);
+        }
+        transform.localPosition = new Vector3(Mathf.Clamp(myPositionOrigin.x + ((positionDifference.x / 100) * speeds.x), clampHorizontal.x, clampHorizontal.y), 
                                          Mathf.Clamp(myPositionOrigin.y + ((positionDifference.y / 100) * speeds.y), clampVertical.x, clampVertical.y),
                                          transform.position.z);
     }

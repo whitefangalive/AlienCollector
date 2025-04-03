@@ -12,9 +12,13 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 784ff324821ff6942bba31c8a8de218e, type: 3}
+    - target: {fileID: 1397386701714554682, guid: c767550f580c83141a644f9f15f1bf24, type: 3}
+      propertyPath: alienName
+      value: Lava Lamp
+      objectReference: {fileID: 0}
     - target: {fileID: 3666561437738852154, guid: c767550f580c83141a644f9f15f1bf24, type: 3}
       propertyPath: m_Name
-      value: VolcanoLavaLamp Variant
+      value: VolcanoLavaLamp
       objectReference: {fileID: 0}
     - target: {fileID: 3722260279391189373, guid: c767550f580c83141a644f9f15f1bf24, type: 3}
       propertyPath: m_Name

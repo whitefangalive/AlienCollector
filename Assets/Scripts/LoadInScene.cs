@@ -42,5 +42,6 @@ public class LoadInScene : MonoBehaviour
         ps.TimeTillCanSpawnAnAlien = save.timeTillCanSpawnAnAlien;
         ps.OwnedCows = save.ownedCows;
         ps.OwnedItems = save.ownedItems;
+        ps.AlienGifts = save.alienGifts;
     }
 }

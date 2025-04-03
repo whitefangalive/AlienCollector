@@ -11,6 +11,7 @@ public class InventorySpawner : MonoBehaviour
     public Transform Item2;
     public GameObject TemplateCow;
     public GameObject TemplateItem;
+    public Transform MarkerTemplate;
 
     private PlayerStats ps;
     private Vector3 distance;
@@ -57,11 +58,20 @@ public class InventorySpawner : MonoBehaviour
             items[fullDistanceDown].GetComponentInChildren<DecorButton>().ContainedObject = itemObject;
             fullDistanceDown++;
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+
+        //set amount for dragging menu
+
+        ClickSlidePosition CSP = transform.parent.GetComponent<ClickSlidePosition>();
+        if (ps.OwnedItems.Count > 0)
+        {
+            MarkerTemplate.localPosition = new Vector3(
+                items[ps.OwnedItems.Count - 1].transform.localPosition.x,
+               (items[0].transform.localPosition.y) + ((items[0].transform.localPosition.y) - (items[ps.OwnedItems.Count - 1].transform.localPosition.y)),
+                items[ps.OwnedItems.Count - 1].transform.localPosition.z);
+        }
+
+
+        CSP.ClampObject = MarkerTemplate;
     }
 }

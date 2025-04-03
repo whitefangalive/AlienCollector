@@ -8,13 +8,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 391341777204580108, guid: 2aedbcd012c58d94a878183b2894b61b, type: 3}
+      propertyPath: alienName
+      value: Fish
+      objectReference: {fileID: 0}
     - target: {fileID: 1218829044878490697, guid: 2aedbcd012c58d94a878183b2894b61b, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 80c646a6a7b53a1479a688decea6bec3, type: 3}
     - target: {fileID: 2659638068399681292, guid: 2aedbcd012c58d94a878183b2894b61b, type: 3}
       propertyPath: m_Name
-      value: ReclinerFish Variant
+      value: ReclinerFish
       objectReference: {fileID: 0}
     - target: {fileID: 3061697694500385254, guid: 2aedbcd012c58d94a878183b2894b61b, type: 3}
       propertyPath: m_LocalScale.x

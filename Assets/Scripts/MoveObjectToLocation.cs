@@ -48,6 +48,17 @@ public class MoveObjectToLocation : MonoBehaviour
         }
         
     }
+    public void GoToLocationIndexWithoutToggle(int i)
+    {
+        GotoLocation[i] = true;
+        for (int j = 0; j < Locations.Count; ++j)
+        {
+            if (j != i)
+            {
+                GotoLocation[j] = false;
+            }
+        }
+    }
     private void FixedUpdate()
     {
         for (int i = 0; i < Locations.Count; ++i)

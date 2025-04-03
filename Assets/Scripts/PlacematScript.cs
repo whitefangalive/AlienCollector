@@ -67,6 +67,7 @@ public class PlacematScript : MonoBehaviour
                         Debug.Log("AlienTime");
                         if (loader.spawner != null)
                         {
+                            Debug.Log(loader.spawner != null);
                             loader.spawner.SpawnAnyAlien(SpawnedDecoration);
                         }
                     }

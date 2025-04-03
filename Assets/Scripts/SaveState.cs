@@ -13,6 +13,7 @@ public class SaveState
     public long timeTillCanSpawnAnAlien;
     public Dictionary<string, int> ownedCows = new Dictionary<string, int>();
     public List<string> ownedItems = new List<string>();
+    public List<Tuple<string, int>> alienGifts = new List<Tuple<string, int>>();
 
     public SaveState(PlayerStats ps) 
     {
@@ -23,5 +24,7 @@ public class SaveState
         timeTillCanSpawnAnAlien = ps.TimeTillCanSpawnAnAlien;
         ownedCows = ps.OwnedCows;
         ownedItems = ps.OwnedItems;
+        alienGifts = ps.AlienGifts;
+
     }
 }

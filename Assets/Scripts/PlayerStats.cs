@@ -28,6 +28,8 @@ public class PlayerStats : MonoBehaviour
     public Dictionary<string, int> OwnedCows = new Dictionary<string, int>();
     public List<string> OwnedItems = new List<string>();
 
+    public List<Tuple<string, int>> AlienGifts = new List<Tuple<string, int>>();
+
     void OnApplicationPause(bool pauseStatus)
     {
         SaveManager.saveData(this);
