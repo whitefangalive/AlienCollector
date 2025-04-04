@@ -130,12 +130,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7476962474605637509, guid: 7260843aca752ef4395e35e4c7d7d1ba, type: 3}
       propertyPath: PossibleAliensToSpawn.Array.size
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7476962474605637509, guid: 7260843aca752ef4395e35e4c7d7d1ba, type: 3}
       propertyPath: PossibleAliensToSpawn.Array.data[0]
       value: 
-      objectReference: {fileID: 7861731912848293777, guid: c4d056cab2d13ea4dbb50e65a514fe33, type: 3}
+      objectReference: {fileID: 5259566734819140627, guid: 2c339921fd9081f42b5c50b76696ab62, type: 3}
+    - target: {fileID: 7476962474605637509, guid: 7260843aca752ef4395e35e4c7d7d1ba, type: 3}
+      propertyPath: PossibleAliensToSpawn.Array.data[1]
+      value: 
+      objectReference: {fileID: 5755508792642714843, guid: 4ed195a62d22ece4796b3d648084b28f, type: 3}
+    - target: {fileID: 7476962474605637509, guid: 7260843aca752ef4395e35e4c7d7d1ba, type: 3}
+      propertyPath: PossibleAliensToSpawn.Array.data[2]
+      value: 
+      objectReference: {fileID: 1468829531822094486, guid: 763898f84341ee549ab69d6fb9e59e1c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

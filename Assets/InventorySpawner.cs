@@ -67,11 +67,14 @@ public class InventorySpawner : MonoBehaviour
         {
             MarkerTemplate.localPosition = new Vector3(
                 items[ps.OwnedItems.Count - 1].transform.localPosition.x,
-               (items[0].transform.localPosition.y) + ((items[0].transform.localPosition.y) - (items[ps.OwnedItems.Count - 1].transform.localPosition.y)),
+               (transform.localPosition.y) + ((items[Mathf.Clamp(CSP.AllowedBoxesToSee - 1, 0, items.Count - 1)].transform.localPosition.y) - (items[ps.OwnedItems.Count - 1].transform.localPosition.y)),
                 items[ps.OwnedItems.Count - 1].transform.localPosition.z);
         }
 
+        GameObject emptyGO = new GameObject();
+        emptyGO.name = "SecondMarker";
+        Transform newTransform = emptyGO.transform;
 
-        CSP.ClampObject = MarkerTemplate;
+        CSP.ClampObject = Instantiate(newTransform, MarkerTemplate.position, MarkerTemplate.rotation, CSP.transform.parent);
     }
 }
