@@ -50,7 +50,7 @@ public class AlienSpawner : MonoBehaviour
                         long timeToGo = UnixTime.GetUnixTime(DateTime.Now.AddMinutes(20));
                         Tuple<long, string, string> alien = new Tuple<long, string, string>(timeToGo, decor.name, createdAlien.name);
                         ps.Aliens.Add(alien);
-                        AlienData adata = createdAlien.GetComponent<AlienData>();
+                        AlienData adata = createdAlien.GetComponentInChildren<AlienData>();
                         adata.decorAttachedTo = data;
                     }
                 }

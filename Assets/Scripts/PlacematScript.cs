@@ -57,6 +57,7 @@ public class PlacematScript : MonoBehaviour
             string ResourceName = ps.PlacematDecorations[transform.gameObject.name];
             if (ResourceName != null && SpawnedDecoration == null && Resources.Load<GameObject>("Decor/" + ResourceName) != null)
             {
+                Debug.Log("Respawning prop: " + ResourceName);
                 SpawnedDecoration = Instantiate(Resources.Load<GameObject>("Decor/" + ResourceName), transform.position, transform.rotation, transform);
                 SpawnedDecoration.name = ResourceName;
 
@@ -176,9 +177,9 @@ public class PlacematScript : MonoBehaviour
                                 SpawnedDecoration.transform.rotation, SpawnedDecoration.transform);
 
                         data.AlienAttached.name = alienObject.name;
-                        if (data.AlienAttached.GetComponent<AlienData>() != null)
+                        if (data.AlienAttached.GetComponentInChildren<AlienData>() != null)
                         {
-                            data.AlienAttached.GetComponent<AlienData>().decorAttachedTo = data;
+                            data.AlienAttached.GetComponentInChildren<AlienData>().decorAttachedTo = data;
                         }
                     }
                 }
@@ -193,7 +194,8 @@ public class PlacematScript : MonoBehaviour
             if (ps.PlacematDecorations.ContainsKey(transform.gameObject.name))
             {
                 ps.PlacematDecorations[transform.gameObject.name] = placementManager.ObjectToPlace.name;
-            } else
+            } 
+            else
             {
                 ps.PlacematDecorations.Add(transform.gameObject.name, placementManager.ObjectToPlace.name);
             }
@@ -203,6 +205,21 @@ public class PlacematScript : MonoBehaviour
             {
                 Destroy(SpawnedDecoration);
             }
+
+            List<PlacematScript> AlreadyExistantObject = new List<PlacematScript>(transform.parent.GetComponentsInChildren<PlacematScript>());
+
+            foreach(PlacematScript pms in AlreadyExistantObject)
+            {
+                if (pms.SpawnedDecoration != null && pms.SpawnedDecoration.name == ResourceName)
+                {
+                    
+                    GameObject obj = pms.SpawnedDecoration;
+                    ps.PlacematDecorations.Remove(pms.gameObject.name);
+                    pms.SpawnedDecoration = null;
+                    Destroy(obj);
+                }
+            }
+            
             SpawnedDecoration = Instantiate(Resources.Load<GameObject>("Decor/" + ResourceName), transform.position, transform.rotation, transform);
             SpawnedDecoration.name = ResourceName;
             placementManager.ObjectToPlace = null;

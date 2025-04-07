@@ -15,6 +15,7 @@ public class InventorySpawner : MonoBehaviour
 
     private PlayerStats ps;
     private Vector3 distance;
+    private int fullDistanceDown = 0;
     public List<GameObject> items = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,6 @@ public class InventorySpawner : MonoBehaviour
         }
         distance = Item1.transform.position - Item2.transform.position;
 
-        int fullDistanceDown = 0;
         for (int i = 0; i < ps.OwnedCows.Count; i++)
         {
             if (ps.OwnedCows.ElementAt(i).Value > 0)
@@ -67,7 +67,7 @@ public class InventorySpawner : MonoBehaviour
         {
             MarkerTemplate.localPosition = new Vector3(
                 items[ps.OwnedItems.Count - 1].transform.localPosition.x,
-               (transform.localPosition.y) + ((items[Mathf.Clamp(CSP.AllowedBoxesToSee - 1, 0, items.Count - 1)].transform.localPosition.y) - (items[ps.OwnedItems.Count - 1].transform.localPosition.y)),
+               (transform.localPosition.y) + ((items[Mathf.Clamp(CSP.AllowedBoxesToSee - 1, 0, items.Count - 1)].transform.localPosition.y) - (items[(fullDistanceDown) - 1].transform.localPosition.y)),
                 items[ps.OwnedItems.Count - 1].transform.localPosition.z);
         }
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class PlayerStats : MonoBehaviour
     public List<string> OwnedItems = new List<string>();
 
     public List<Tuple<string, int>> AlienGifts = new List<Tuple<string, int>>();
+    public List<string> DiscoveredAliens = new List<string>();
 
     void OnApplicationPause(bool pauseStatus)
     {

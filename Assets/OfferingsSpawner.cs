@@ -45,8 +45,8 @@ public class OfferingsSpawner : MonoBehaviour
             Debug.Log("Aliens/" + itemG.Item1);
             GameObject alienImg = Resources.Load<GameObject>("Aliens/" + itemG.Item1);
             
-            items[i].GetComponentInChildren<OfferingsContainer>().image.sprite = alienImg.GetComponent<Button>().targetGraphic.gameObject.GetComponent<Image>().sprite;
-            items[i].GetComponentInChildren<OfferingsContainer>().nameText.text = alienImg.GetComponent<AlienData>().alienName;
+            items[i].GetComponentInChildren<OfferingsContainer>().image.sprite = alienImg.GetComponentInChildren<Button>().targetGraphic.gameObject.GetComponent<Image>().sprite;
+            items[i].GetComponentInChildren<OfferingsContainer>().nameText.text = alienImg.GetComponentInChildren<AlienData>().alienName;
             items[i].GetComponentInChildren<OfferingsContainer>().number = i;
         }
 

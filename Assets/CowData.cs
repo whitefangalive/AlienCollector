@@ -18,7 +18,7 @@ public class CowData : MonoBehaviour
             ps = GameObject.Find("SaveState").GetComponent<PlayerStats>();
         }
         int j = 0;
-        if (risk == 100)
+        if (risk >= 100)
         {
             for(int i = 0; i < ps.Cows.Count; i++)
             {

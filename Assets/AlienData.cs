@@ -15,16 +15,32 @@ public class AlienData : MonoBehaviour
     private PlayerStats ps;
     private Tuple<long, string, string> thisAlien;
     public long TimeToDespawnAt;
+    public Planets.Planet FavoritePlanet;
+    [TextArea]
+    public string Description;
     // Start is called before the first frame update
     void Start()
     {
         ps = GameObject.Find("SaveState").GetComponent<PlayerStats>();
         foreach (Tuple<long, string, string> alien in ps.Aliens)
         {
-            if (alien.Item3 == gameObject.name)
+            if (alien.Item3 == transform.parent.gameObject.name)
             {
                 thisAlien = alien;
             }
+        }
+        GetComponent<Button>().onClick.AddListener(collectSelf);
+
+    }
+    public void collectSelf()
+    {
+        if (ps.DiscoveredAliens == null)
+        {
+            ps.DiscoveredAliens = new List<string>();
+        }
+        if (!ps.DiscoveredAliens.Contains(alienName))
+        {
+            ps.DiscoveredAliens.Add(alienName);
         }
     }
     // Update is called once per frame
@@ -53,11 +69,9 @@ public class AlienData : MonoBehaviour
                         ps.Cows[i] = new Tuple<string, int> (thisCow.Item1, cow.GetComponent<CowData>().risk);
                     }
                 }
-
-                // give scrap
-                ps.AlienGifts.Add(new Tuple<string, int>(thisAlien.Item3, UnityEngine.Random.Range(1 + wealth, wealth * 2)));
             }
-            
+            ps.AlienGifts.Add(new Tuple<string, int>(thisAlien.Item3, UnityEngine.Random.Range(1 + wealth, wealth * 2)));
+
             Destroy(gameObject);
         }
     }

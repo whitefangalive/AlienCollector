@@ -29,10 +29,6 @@ public class LoadInScene : MonoBehaviour
             needsSpawnAlien = true;
         }
     }
-    private void Awake()
-    {
-        
-    }
     public void unpackData(SaveState save)
     {
         ps.PlacematDecorations = save.placematDecorations;
@@ -44,5 +40,6 @@ public class LoadInScene : MonoBehaviour
         ps.OwnedItems = save.ownedItems;
         ps.AlienGifts = save.alienGifts;
         ps.TimeLeftGame = save.timeLeftGame;
+        ps.DiscoveredAliens = save.discoveredAliens;
     }
 }

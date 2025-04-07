@@ -56,8 +56,14 @@ public class ClickSlidePosition : MonoBehaviour
         }
         if (ClampObject != null)
         {
-            clampHorizontal = new Vector2(fullPositionOrigin.x, ClampObject.localPosition.x);
-            clampVertical = new Vector2(fullPositionOrigin.y, ClampObject.localPosition.y);
+            if (speeds.y != 0)
+            {
+                clampVertical = new Vector2(fullPositionOrigin.y, ClampObject.localPosition.y);
+            }
+            if (speeds.x != 0)
+            {
+                clampHorizontal = new Vector2(fullPositionOrigin.x, ClampObject.localPosition.x);
+            }
         }
         transform.localPosition = new Vector3(Mathf.Clamp(myPositionOrigin.x + ((positionDifference.x / 100) * speeds.x), clampHorizontal.x, clampHorizontal.y), 
                                          Mathf.Clamp(myPositionOrigin.y + ((positionDifference.y / 100) * speeds.y), clampVertical.x, clampVertical.y),
