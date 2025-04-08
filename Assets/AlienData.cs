@@ -41,7 +41,10 @@ public class AlienData : MonoBehaviour
         if (!ps.DiscoveredAliens.Contains(alienName))
         {
             ps.DiscoveredAliens.Add(alienName);
+            Animator animator = GameObject.Find("MainAnimator").GetComponent<Animator>();
+            animator.SetTrigger("Open");
         }
+        
     }
     // Update is called once per frame
     void Update()
@@ -72,7 +75,7 @@ public class AlienData : MonoBehaviour
             }
             ps.AlienGifts.Add(new Tuple<string, int>(thisAlien.Item3, UnityEngine.Random.Range(1 + wealth, wealth * 2)));
 
-            Destroy(gameObject);
+            Destroy(gameObject.transform.parent);
         }
     }
 }

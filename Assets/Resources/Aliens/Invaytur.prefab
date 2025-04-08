@@ -105,6 +105,10 @@ PrefabInstance:
       value: Invaytur
       objectReference: {fileID: 0}
     - target: {fileID: 4795151850392877532, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
+      propertyPath: Description
+      value: Didn't get the part for ET.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4795151850392877532, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
       propertyPath: FavoritePlanet
       value: 1
       objectReference: {fileID: 0}

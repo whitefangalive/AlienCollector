@@ -58,7 +58,7 @@ MonoBehaviour:
   currentTime: 0
   TimeToDespawnAt: 0
   FavoritePlanet: 0
-  Description: 
+  Description: "He\u2019s just a fella that wants to be your friend."
 --- !u!114 &4807513152754704279
 MonoBehaviour:
   m_ObjectHideFlags: 0

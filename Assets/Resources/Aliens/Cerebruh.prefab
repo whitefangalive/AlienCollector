@@ -58,7 +58,7 @@ MonoBehaviour:
   currentTime: 0
   TimeToDespawnAt: 0
   FavoritePlanet: 0
-  Description: 
+  Description: Is actually incredibly stupid.
 --- !u!114 &4260558095118971669
 MonoBehaviour:
   m_ObjectHideFlags: 0
