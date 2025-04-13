@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5183133402788150592
+--- !u!1 &6555144601647810878
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,52 +8,52 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3875930059941613070}
-  - component: {fileID: 3120626423516353830}
-  - component: {fileID: 3441393815256782585}
-  - component: {fileID: 3625074630134755753}
-  - component: {fileID: 8759361229780736773}
+  - component: {fileID: 2025771473670782986}
+  - component: {fileID: 200441002335184153}
+  - component: {fileID: 7897295293574712723}
+  - component: {fileID: 1263413405416378505}
+  - component: {fileID: 5322518080555115331}
   m_Layer: 5
-  m_Name: SaltLamp
+  m_Name: FishTank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &3875930059941613070
+--- !u!224 &2025771473670782986
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5183133402788150592}
+  m_GameObject: {fileID: 6555144601647810878}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.1601174, y: 2.1601174, z: 2.1601174}
+  m_LocalScale: {x: 1.5385727, y: 1.5385727, z: 1.5385727}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.9, y: 36.4}
+  m_AnchoredPosition: {x: -5.2, y: 45.3}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &3120626423516353830
+--- !u!222 &200441002335184153
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5183133402788150592}
+  m_GameObject: {fileID: 6555144601647810878}
   m_CullTransparentMesh: 1
---- !u!114 &3441393815256782585
+--- !u!114 &7897295293574712723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5183133402788150592}
+  m_GameObject: {fileID: 6555144601647810878}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b72ce866d1acde44bbdf099baa4a21c4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 48499882d14cfd14f9dc8eb113e63c14, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -77,31 +77,30 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3625074630134755753
+--- !u!114 &1263413405416378505
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5183133402788150592}
+  m_GameObject: {fileID: 6555144601647810878}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 292d0cf3291c7a34db330ad8c968a509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PossibleAliensToSpawn:
-  - {fileID: 2397786943863649734, guid: 1f75b0f9e0054f145a9592585f42da4a, type: 3}
-  - {fileID: 8498446307170958911, guid: 140b6d66cdf18ff43afdf32d58593c55, type: 3}
-  - {fileID: 2397786943863649734, guid: 1f75b0f9e0054f145a9592585f42da4a, type: 3}
+  - {fileID: 2404014396333546773, guid: 7cc7e6c670fbe104fafd56429fafa7a2, type: 3}
+  - {fileID: 3907347587599803529, guid: 8e6b26e8eb2f5ca419d9d81321a2f5dc, type: 3}
   PossibleAliensToSpawnMoon: []
   AlienAttached: {fileID: 0}
---- !u!70 &8759361229780736773
-CapsuleCollider2D:
+--- !u!61 &5322518080555115331
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5183133402788150592}
+  m_GameObject: {fileID: 6555144601647810878}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -127,6 +126,16 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2.8430176, y: -8.529053}
-  m_Size: {x: 19.182678, y: 19.182678}
-  m_Direction: 0
+  m_Offset: {x: -2.1915836, y: -11.800888}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 78.21126, y: 67.75914}
+  m_EdgeRadius: 0

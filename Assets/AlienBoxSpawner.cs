@@ -39,7 +39,6 @@ public class AlienBoxSpawner : MonoBehaviour
         List<string> listOfItems = ps.DiscoveredAliens;
         int count = 0;
         int numberOfRows = Mathf.CeilToInt(listOfItems.Count / ColumnMax);
-        Debug.Log(numberOfRows);
         for (int i = 0; i < numberOfRows; i++)
         {
             Debug.Log(listOfItems.Count);

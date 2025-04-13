@@ -75,7 +75,7 @@ public class AlienData : MonoBehaviour
             }
             ps.AlienGifts.Add(new Tuple<string, int>(thisAlien.Item3, UnityEngine.Random.Range(1 + wealth, wealth * 2)));
 
-            Destroy(gameObject.transform.parent);
+            Destroy(gameObject.transform.parent.gameObject);
         }
     }
 }

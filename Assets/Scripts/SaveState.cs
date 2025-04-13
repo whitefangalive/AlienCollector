@@ -16,6 +16,7 @@ public class SaveState
     public List<Tuple<string, int>> alienGifts = new List<Tuple<string, int>>();
     public long timeLeftGame = 0;
     public List<string> discoveredAliens = new List<string>();
+    public int tutorialState;
 
     public SaveState(PlayerStats ps) 
     {
@@ -29,6 +30,6 @@ public class SaveState
         alienGifts = ps.AlienGifts;
         timeLeftGame = ps.TimeLeftGame;
         discoveredAliens = ps.DiscoveredAliens;
-
+        tutorialState = ps.TutorialState;
     }
 }

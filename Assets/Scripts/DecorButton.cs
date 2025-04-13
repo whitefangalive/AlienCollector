@@ -13,6 +13,7 @@ public class DecorButton : MonoBehaviour
     public int cost = 0;
     public TMP_Text costText;
     private PlayerStats ps;
+    public TMP_Text Quantity;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,18 @@ public class DecorButton : MonoBehaviour
         if (costText != null)
         {
             costText.text = cost.ToString();
+        }
+        if (Quantity != null)
+        {
+            if (ps.OwnedCows.ContainsKey(ContainedObject.name))
+            {
+                Quantity.text = "x" + ps.OwnedCows[ContainedObject.name].ToString();
+            } 
+            else
+            {
+                Quantity.text = "x0";
+            }
+            
         }
     }
 

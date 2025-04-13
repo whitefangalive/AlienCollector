@@ -18,18 +18,25 @@ public class clickMovable : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public float scaleSpeed = 1f;
 
     private Vector3 startingScale;
-    private Vector3 offset;
+    private Vector2 offset;
     private bool needsToBeShrunk;
+    public RectTransform canvas;
 
     [Tooltip("If not empty will switch object to this parent when picked up then return once let go.")]
     public Transform objectToSwitchParent;
     private Transform oldParent;
+
+    private Vector3 lastTapperPosition = new Vector3();
+    private Vector3 TapVelocity = new Vector3(0, 0, 0);
+
     private void Start()
     {
         image = GetComponent<Image>();
         image.color = Color;
         startingScale = transform.localScale;
         oldParent = transform.parent;
+
+        lastTapperPosition = Input.mousePosition;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -44,7 +51,7 @@ public class clickMovable : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        playAudioClip(Resources.Load<AudioClip>("CardGrab"));
+        //playAudioClip(Resources.Load<AudioClip>("CardGrab"));
         clicking = true;
         offset = Input.mousePosition - transform.position;
         needsToBeShrunk = true;
@@ -59,7 +66,7 @@ public class clickMovable : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerUp(PointerEventData eventData)
     {
         clicking = false;
-        playAudioClip(Resources.Load<AudioClip>("CardDrop"));
+        //playAudioClip(Resources.Load<AudioClip>("CardDrop"));
     }
 
     private void playAudioClip(AudioClip clip)
@@ -78,20 +85,24 @@ public class clickMovable : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         if (clicking)
         {
+            TapVelocity = tapperDelta() / 10;
+            Vector2 mousePos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, Input.mousePosition, Camera.main, out mousePos);
             transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, startingScale.x * scaleAmount, Time.deltaTime * scaleSpeed),
                                            Mathf.Lerp(transform.localScale.y, startingScale.y * scaleAmount, Time.deltaTime * scaleSpeed), transform.localScale.z);
             if (AttachedOffset)
             {
-                transform.position = Input.mousePosition - offset;
+                transform.position = mousePos - offset;
             }
             else
             {
-                transform.position = new Vector3(Mathf.Lerp(transform.position.x, Input.mousePosition.x, Time.deltaTime * speed),
-                                                 Mathf.Lerp(transform.position.y, Input.mousePosition.y, Time.deltaTime * speed), transform.position.z);
+                gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(Mathf.Lerp(transform.position.x, mousePos.x, Time.deltaTime * speed),
+                                                 Mathf.Lerp(transform.position.y, mousePos.y, Time.deltaTime * speed), transform.position.z);
             }
         }
         else
         {
+            gameObject.GetComponent<Rigidbody2D>().velocity = TapVelocity;
             if (needsToBeShrunk)
             {
                 transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, startingScale.x, Time.deltaTime * scaleSpeed),
@@ -112,5 +123,10 @@ public class clickMovable : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public bool isAttached()
     {
         return clicking;
+    }
+
+    public Vector3 tapperDelta()
+    {
+        return Input.mousePosition - lastTapperPosition;
     }
 }

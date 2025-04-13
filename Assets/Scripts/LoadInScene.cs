@@ -41,5 +41,6 @@ public class LoadInScene : MonoBehaviour
         ps.AlienGifts = save.alienGifts;
         ps.TimeLeftGame = save.timeLeftGame;
         ps.DiscoveredAliens = save.discoveredAliens;
+        ps.TutorialState = save.tutorialState;
     }
 }

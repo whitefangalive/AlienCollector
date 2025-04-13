@@ -33,6 +33,9 @@ public class PlayerStats : MonoBehaviour
 
     public List<Tuple<string, int>> AlienGifts = new List<Tuple<string, int>>();
     public List<string> DiscoveredAliens = new List<string>();
+    public long GameStartTime;
+
+    public int TutorialState;
 
     void OnApplicationPause(bool pauseStatus)
     {

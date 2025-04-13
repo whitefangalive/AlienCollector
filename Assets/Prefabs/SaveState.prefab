@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 176553411894140583}
   - component: {fileID: 2926138590581687278}
   - component: {fileID: 2775951205244835564}
+  - component: {fileID: 5967182250760704674}
   m_Layer: 0
   m_Name: SaveState
   m_TagString: Untagged
@@ -65,6 +66,8 @@ MonoBehaviour:
   TimeLeftGame: 0
   OwnedItems: []
   DiscoveredAliens: []
+  GameStartTime: 0
+  TutorialState: 0
 --- !u!114 &2926138590581687278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,19 +93,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3960c814eafc02143b243d282051e42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollectAlienButton:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2775951205244835564}
-        m_TargetAssemblyTypeName: CollectionManager, Assembly-CSharp
-        m_MethodName: CollectAlienName
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  tempName: 
+--- !u!114 &5967182250760704674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8408413186244732363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b4a743cb10f25b46822a28f2cc97827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
