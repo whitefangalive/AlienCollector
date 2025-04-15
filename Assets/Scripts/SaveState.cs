@@ -17,6 +17,7 @@ public class SaveState
     public long timeLeftGame = 0;
     public List<string> discoveredAliens = new List<string>();
     public int tutorialState;
+    public long gameStartTime;
 
     public SaveState(PlayerStats ps) 
     {
@@ -31,5 +32,6 @@ public class SaveState
         timeLeftGame = ps.TimeLeftGame;
         discoveredAliens = ps.DiscoveredAliens;
         tutorialState = ps.TutorialState;
+        gameStartTime = ps.GameStartTime;
     }
 }

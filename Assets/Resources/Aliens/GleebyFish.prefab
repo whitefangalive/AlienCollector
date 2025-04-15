@@ -96,13 +96,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alienName: Fish
   strength: 20
-  wealth: 5
+  wealth: 7
   despawnTime: 0
   decorAttachedTo: {fileID: 0}
   currentTime: 0
   TimeToDespawnAt: 0
   FavoritePlanet: 0
-  Description: 
+  Description: Zepbob glorbin zorb "I need to file my taxes" Zorsh Lopin.
 --- !u!1 &8198504871941615290
 GameObject:
   m_ObjectHideFlags: 0

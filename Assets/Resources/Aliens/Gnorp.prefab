@@ -52,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alienName: Gnorp
   strength: 20
-  wealth: 5
+  wealth: 4
   despawnTime: 0
   decorAttachedTo: {fileID: 0}
   currentTime: 0

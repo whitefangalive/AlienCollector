@@ -6,7 +6,7 @@ using UnityEngine;
 public class LoadInScene : MonoBehaviour
 {
     private PlayerStats ps;
-    [HideInInspector]public AlienSpawner spawner;
+    public AlienSpawner spawner;
     public bool needsSpawnAlien = false;
     
     public void setupScene()
@@ -29,6 +29,15 @@ public class LoadInScene : MonoBehaviour
             needsSpawnAlien = true;
         }
     }
+    private void Update()
+    {
+        GameObject pso = GameObject.FindGameObjectWithTag("SaveState");
+        if (spawner == null)
+        {
+            Debug.Log("Setting Spawner");
+            spawner = pso.GetComponent<AlienSpawner>();
+        }
+    }
     public void unpackData(SaveState save)
     {
         ps.PlacematDecorations = save.placematDecorations;
@@ -42,5 +51,6 @@ public class LoadInScene : MonoBehaviour
         ps.TimeLeftGame = save.timeLeftGame;
         ps.DiscoveredAliens = save.discoveredAliens;
         ps.TutorialState = save.tutorialState;
+        ps.GameStartTime = save.gameStartTime;
     }
 }

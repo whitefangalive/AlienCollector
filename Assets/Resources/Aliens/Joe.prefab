@@ -170,8 +170,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alienName: Joe
-  strength: 20
-  wealth: 5
+  strength: 40
+  wealth: 10
   despawnTime: 0
   decorAttachedTo: {fileID: 0}
   currentTime: 0

@@ -24,8 +24,6 @@ public class PlacematScript : MonoBehaviour
         if (ps == null)
         {
             ps = GameObject.Find("SaveState").GetComponent<PlayerStats>();
-            
-
         }
         if (placementManager == null)
         {
@@ -63,34 +61,50 @@ public class PlacematScript : MonoBehaviour
 
                 RespawnAlien();
 
-                //needs to be done after loading in placemat decor
-                LoadInScene loader = GameObject.Find("LoadIn").GetComponent<LoadInScene>();
-                int rand = UnityEngine.Random.Range(0, 2);
-                if (UnixTime.GetUnixTime(DateTime.Now) > ps.TimeTillCanSpawnAnAlien)
-                {
-                    if (SpawnedDecoration != null && rand == 1)
-                    {
-                        Debug.Log("AlienTime");
-                        if (loader.spawner != null)
-                        {
-                            Debug.Log(loader.spawner != null);
-                            loader.spawner.SpawnAnyAlien(SpawnedDecoration);
-                        }
-                    }
-                } else
-                {
-                    Debug.Log("Time Before Can spawn next alien: " + (ps.TimeTillCanSpawnAnAlien - UnixTime.GetUnixTime(DateTime.Now)).ToString());
-                }
-                
+                //SpawnAlienWhenGone();
+
+
             }
         }
+
         if (ps.TimeLeftGame > 0 && once)
         {
             SpawnOutOfFocus();
+            SpawnAlienWhenGone();
             once = false;
         }
         
 
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (focus)
+        {
+            once = true;
+        }
+    }
+    private void SpawnAlienWhenGone()
+    {
+        //needs to be done after loading in placemat decor
+        LoadInScene loader = GameObject.Find("LoadIn").GetComponent<LoadInScene>();
+        int rand = UnityEngine.Random.Range(0, 2);
+        if (UnixTime.GetUnixTime(DateTime.Now) > ps.TimeTillCanSpawnAnAlien)
+        {
+            if (SpawnedDecoration != null && rand == 1)
+            {
+                Debug.Log("AlienTime");
+                if (loader.spawner != null)
+                {
+                    Debug.Log(loader.spawner != null);
+                    loader.spawner.SpawnAnyAlien(SpawnedDecoration);
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Time Before Can spawn next alien: " + (ps.TimeTillCanSpawnAnAlien - UnixTime.GetUnixTime(DateTime.Now)).ToString());
+        }
     }
 
     private void SpawnOutOfFocus()
@@ -103,7 +117,7 @@ public class PlacematScript : MonoBehaviour
         if (SpawnedDecoration != null && rand == 1)
         {
             //spawn aliens if gone for more then 20 minutes, spawn one for each 20
-            for (int i = 0; i < (UnixTime.GetUnixTime(DateTime.Now) - ps.TimeLeftGame) / UnixTime.GetUnixTimeMinutes(20); ++i)
+            for (int i = 0; i < (UnixTime.GetUnixTime(DateTime.Now) - ps.TimeLeftGame) / UnixTime.GetUnixTimeMinutes((long)(20.0f / ps.TimeScale)); ++i)
             {
                 if (ps.Cows.Count > 0)
                 {
@@ -132,8 +146,7 @@ public class PlacematScript : MonoBehaviour
                                 randAlien = UnityEngine.Random.Range(0, data.PossibleAliensToSpawn.Count);
                             }
 
-                            AlienData alienData = data.PossibleAliensToSpawn[randAlien].GetComponent<AlienData>();
-
+                            AlienData alienData = data.PossibleAliensToSpawn[randAlien].GetComponentInChildren<AlienData>();
 
                             if (cow != null)
                             {

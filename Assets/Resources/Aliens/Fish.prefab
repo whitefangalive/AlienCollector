@@ -102,7 +102,7 @@ MonoBehaviour:
   currentTime: 0
   TimeToDespawnAt: 0
   FavoritePlanet: 0
-  Description: 
+  Description: Tries really hard but can never quite fit in.
 --- !u!1 &7867197464835026032
 GameObject:
   m_ObjectHideFlags: 0

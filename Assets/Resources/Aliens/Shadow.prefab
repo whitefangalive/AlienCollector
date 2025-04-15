@@ -96,9 +96,13 @@ PrefabInstance:
       propertyPath: alienName
       value: Shadow
       objectReference: {fileID: 0}
+    - target: {fileID: 4795151850392877532, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
+      propertyPath: Description
+      value: A total mystery. Did you even actually see it?
+      objectReference: {fileID: 0}
     - target: {fileID: 7137485010300590556, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
       propertyPath: m_Name
-      value: LampShadow
+      value: Shadow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

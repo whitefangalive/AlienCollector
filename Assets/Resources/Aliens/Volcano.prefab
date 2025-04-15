@@ -58,7 +58,7 @@ MonoBehaviour:
   currentTime: 0
   TimeToDespawnAt: 0
   FavoritePlanet: 2
-  Description: 
+  Description: Might just be a lava lamp.
 --- !u!114 &1185206599657120918
 MonoBehaviour:
   m_ObjectHideFlags: 0

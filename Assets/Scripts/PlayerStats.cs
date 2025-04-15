@@ -37,6 +37,8 @@ public class PlayerStats : MonoBehaviour
 
     public int TutorialState;
 
+    public float TimeScale = 1;
+
     void OnApplicationPause(bool pauseStatus)
     {
         TimeLeftGame = UnixTime.GetUnixTime(DateTime.Now);

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SaveMe
   - Cow
+  - SaveState
   layers:
   - Default
   - TransparentFX

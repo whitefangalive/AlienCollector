@@ -127,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alienName: GoldZilla
   strength: 40
-  wealth: 5
+  wealth: 6
   despawnTime: 0
   decorAttachedTo: {fileID: 0}
   currentTime: 0

@@ -58,7 +58,7 @@ MonoBehaviour:
   currentTime: 0
   TimeToDespawnAt: 0
   FavoritePlanet: 0
-  Description: 
+  Description: A royal Jellyfish from Glargon Alpha. Here to spread gifts.
 --- !u!114 &7687136232286541602
 MonoBehaviour:
   m_ObjectHideFlags: 0

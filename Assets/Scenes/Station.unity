@@ -1290,9 +1290,9 @@ RectTransform:
   - {fileID: 252930101}
   m_Father: {fileID: 2167887}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 163, y: -724}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -62, y: -770}
   m_SizeDelta: {x: 128.698, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &398521188
@@ -7394,7 +7394,7 @@ MonoBehaviour:
   MousePositionOrigin: {x: 0, y: 0, z: 0}
   positionDifference: {x: 0, y: 0, z: 0}
   cameraPositionOrigin: {x: 0, y: 0}
-  speed: 100
+  speed: 150
 --- !u!1 &979421948
 GameObject:
   m_ObjectHideFlags: 0
@@ -7634,9 +7634,9 @@ RectTransform:
   - {fileID: 1147856764}
   m_Father: {fileID: 2167887}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 163, y: -724}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -62, y: -770}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1191712499
