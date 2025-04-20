@@ -68,7 +68,7 @@ MonoBehaviour:
   DiscoveredAliens: []
   GameStartTime: 0
   TutorialState: 0
-  TimeScale: 15
+  TimeScale: 1
 --- !u!114 &2926138590581687278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,3 +106,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4a743cb10f25b46822a28f2cc97827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPlanet: 0
+  gameStartTime: 0

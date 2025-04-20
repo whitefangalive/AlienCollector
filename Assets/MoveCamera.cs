@@ -45,6 +45,6 @@ public class MoveCamera : MonoBehaviour
             MousePosition = new Vector3(touch.position.x, touch.position.y, 5);
             positionDifference = MousePositionOrigin - MousePosition;
         }
-        transform.position = new Vector3(Mathf.Clamp(cameraPositionOrigin.x + (positionDifference.x / speed), -6.45f, 0), transform.position.y, transform.position.z);
+        transform.position = new Vector3(Mathf.Clamp(cameraPositionOrigin.x + (positionDifference.x / speed), -6.7f, 0.22f), transform.position.y, transform.position.z);
     }
 }

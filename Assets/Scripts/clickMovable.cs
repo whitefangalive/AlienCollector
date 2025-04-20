@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine; 
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -9,34 +8,34 @@ public class clickMovable : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 {
     public Color Color = Color.white;
     public Color HoverColor = Color.gray;
-    private Image image;
-    private bool clicking = false;
-
-    public float speed = 100f;
+    public float speed = 10f;
     public bool AttachedOffset = false;
-    public float scaleAmount = 1f;
-    public float scaleSpeed = 1f;
-
-    private Vector3 startingScale;
-    private Vector2 offset;
-    private bool needsToBeShrunk;
+    public float scaleAmount = 1.2f;
+    public float scaleSpeed = 10f;
     public RectTransform canvas;
 
     [Tooltip("If not empty will switch object to this parent when picked up then return once let go.")]
     public Transform objectToSwitchParent;
+
+    private Image image;
+    private RectTransform rectTransform;
+    private bool clicking = false;
+    private Vector3 startingScale;
+    private Vector2 offset;
+    private bool needsToBeShrunk = false;
     private Transform oldParent;
 
-    private Vector3 lastTapperPosition = new Vector3();
-    private Vector3 TapVelocity = new Vector3(0, 0, 0);
+    private Vector3 lastTapperPosition;
+    private Vector3 TapVelocity;
 
     private void Start()
     {
         image = GetComponent<Image>();
-        image.color = Color;
+        rectTransform = GetComponent<RectTransform>();
         startingScale = transform.localScale;
         oldParent = transform.parent;
-
         lastTapperPosition = Input.mousePosition;
+        image.color = Color;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -51,65 +50,58 @@ public class clickMovable : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        //playAudioClip(Resources.Load<AudioClip>("CardGrab"));
         clicking = true;
-        offset = Input.mousePosition - transform.position;
+
+        Vector2 localMousePos;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, Input.mousePosition, Camera.main, out localMousePos);
+        offset = (Vector2)rectTransform.localPosition - localMousePos;
+
         needsToBeShrunk = true;
+
         if (objectToSwitchParent != null)
         {
             transform.SetParent(objectToSwitchParent, true);
             transform.SetAsFirstSibling();
         }
-
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         clicking = false;
-        //playAudioClip(Resources.Load<AudioClip>("CardDrop"));
     }
 
-    private void playAudioClip(AudioClip clip)
-    {
-        GameObject obj = new GameObject("AudioSource");
-        AudioSource newSource = obj.AddComponent<AudioSource>();
-        newSource.volume = PlayerPrefs.GetFloat("effectsVolume");
-        newSource.pitch = Random.Range(1.10f, 1.22f);
-        newSource.playOnAwake = false;
-        obj.AddComponent<DestroyOnAudioSourceEnd>();
-        obj.AddComponent<dontDestroyOnLoad>();
-        newSource.clip = clip;
-        newSource.Play();
-    }
     private void FixedUpdate()
     {
         if (clicking)
         {
-            TapVelocity = tapperDelta() / 10;
-            Vector2 mousePos;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, Input.mousePosition, Camera.main, out mousePos);
-            transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, startingScale.x * scaleAmount, Time.deltaTime * scaleSpeed),
-                                           Mathf.Lerp(transform.localScale.y, startingScale.y * scaleAmount, Time.deltaTime * scaleSpeed), transform.localScale.z);
+            TapVelocity = (Input.mousePosition - lastTapperPosition) / 10f;
+
+            Vector2 localMousePos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, Input.mousePosition, Camera.main, out localMousePos);
+
+            rectTransform.localScale = Vector3.Lerp(rectTransform.localScale, startingScale * scaleAmount, Time.deltaTime * scaleSpeed);
+
             if (AttachedOffset)
             {
-                transform.position = mousePos - offset;
+                rectTransform.localPosition = localMousePos + offset;
             }
             else
             {
-                gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(Mathf.Lerp(transform.position.x, mousePos.x, Time.deltaTime * speed),
-                                                 Mathf.Lerp(transform.position.y, mousePos.y, Time.deltaTime * speed), transform.position.z);
+                rectTransform.localPosition = Vector2.Lerp(rectTransform.localPosition, localMousePos, Time.deltaTime * speed);
             }
+
+            lastTapperPosition = Input.mousePosition;
         }
         else
         {
-            gameObject.GetComponent<Rigidbody2D>().velocity = TapVelocity;
             if (needsToBeShrunk)
             {
-                transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, startingScale.x, Time.deltaTime * scaleSpeed),
-                                           Mathf.Lerp(transform.localScale.y, startingScale.y, Time.deltaTime * scaleSpeed), transform.localScale.z);
-                if (transform.localScale.x - startingScale.x < 0.001)
+                rectTransform.localScale = Vector3.Lerp(rectTransform.localScale, startingScale, Time.deltaTime * scaleSpeed);
+
+                if (Vector3.Distance(rectTransform.localScale, startingScale) < 0.01f)
                 {
                     needsToBeShrunk = false;
+
                     if (objectToSwitchParent != null)
                     {
                         transform.SetParent(oldParent, true);
@@ -120,13 +112,9 @@ public class clickMovable : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             }
         }
     }
+
     public bool isAttached()
     {
         return clicking;
-    }
-
-    public Vector3 tapperDelta()
-    {
-        return Input.mousePosition - lastTapperPosition;
     }
 }

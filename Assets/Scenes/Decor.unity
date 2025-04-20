@@ -702,7 +702,7 @@ MonoBehaviour:
   clampHorizontal: {x: 0, y: 0}
   clampVertical: {x: 0, y: 0}
   ClampObject: {fileID: 0}
-  AllowedBoxesToSee: 10
+  AllowedBoxesToSee: 9
 --- !u!1 &188000156
 GameObject:
   m_ObjectHideFlags: 0
