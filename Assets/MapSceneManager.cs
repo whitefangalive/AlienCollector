@@ -8,7 +8,7 @@ public class MapSceneManager : MonoBehaviour
 {
     public TMP_Text nextPlanetText;
     public TMP_Text ETA;
-    private PlanetManager pm;
+    public PlanetManager pm;
     public Transform spaceShip;
     // Start is called before the first frame update
     void Start()

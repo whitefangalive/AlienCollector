@@ -24,26 +24,28 @@ public class AlienSpawner : MonoBehaviour
                 DecorData data = decor.GetComponent<DecorData>();
                 if (data.AlienAttached == null)
                 {
-                    int randAlien = -1;
-                    if (false/**is by the moon*/)
+                    List<GameObject> FilteredListWithPlanet = new List<GameObject>();
+
+                    PlanetManager pm = GameObject.Find("SaveState").GetComponent<PlanetManager>();
+                    for (int i = 0; i < data.PossibleAliensToSpawn.Count; i++)
                     {
-#pragma warning disable CS0162 // Unreachable code detected
-                        randAlien = UnityEngine.Random.Range(0, data.PossibleAliensToSpawnMoon.Count);
-#pragma warning restore CS0162 // Unreachable code detected
+                        if (data.PossibleAliensToSpawn[i].GetComponentInChildren<AlienData>().FavoritePlanet == pm.currentPlanet || data.PossibleAliensToSpawn[i].GetComponentInChildren<AlienData>().FavoritePlanet == Planets.Planet.Space)
+                        {
+                            FilteredListWithPlanet.Add(data.PossibleAliensToSpawn[i]);
+                        }
                     }
-                    else
-                    {
-                        randAlien = UnityEngine.Random.Range(0, data.PossibleAliensToSpawn.Count);
-                    }
-                    if (GameObject.Find(data.PossibleAliensToSpawn[randAlien].name) == null)
+                    int randAlien = UnityEngine.Random.Range(0, FilteredListWithPlanet.Count);
+                        
+                    
+                    if (GameObject.Find(FilteredListWithPlanet[randAlien].name) == null)
                     {
                         Debug.Log("Spawned Aliens");
                         ps.TimeTillCanSpawnAnAlien = UnixTime.GetUnixTime(DateTime.Now.AddMinutes(14 / ps.TimeScale));
-                        GameObject createdAlien = Instantiate(data.PossibleAliensToSpawn[randAlien],
+                        GameObject createdAlien = Instantiate(FilteredListWithPlanet[randAlien],
                             decor.transform.position,
                             decor.transform.rotation, decor.transform);
 
-                        createdAlien.name = data.PossibleAliensToSpawn[randAlien].name;
+                        createdAlien.name = FilteredListWithPlanet[randAlien].name;
 
 
                         data.AlienAttached = createdAlien;

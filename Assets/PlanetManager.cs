@@ -15,7 +15,9 @@ public class PlanetManager : MonoBehaviour
     {
         PlanetsAndEta.Add(new Tuple<Planets.Planet, long>(Planets.Planet.Earth, 0));
         PlanetsAndEta.Add(new Tuple<Planets.Planet, long>(Planets.Planet.Moon, UnixTime.GetUnixTimeMinutes(4320)));
-        PlanetsAndEta.Add(new Tuple<Planets.Planet, long>(Planets.Planet.Mars, UnixTime.GetUnixTimeMinutes(9320)));
+        PlanetsAndEta.Add(new Tuple<Planets.Planet, long>(Planets.Planet.Mars, UnixTime.GetUnixTimeMinutes(8640)));
+        PlanetsAndEta.Add(new Tuple<Planets.Planet, long>(Planets.Planet.Astroids, UnixTime.GetUnixTimeMinutes(12960)));
+        PlanetsAndEta.Add(new Tuple<Planets.Planet, long>(Planets.Planet.Jupiter, UnixTime.GetUnixTimeMinutes(15840)));
     }
 
     private void Update()
@@ -29,16 +31,21 @@ public class PlanetManager : MonoBehaviour
         for (int i = 0; i < PlanetsAndEta.Count; i++)
         {
             Tuple<Planets.Planet, long> tuple = PlanetsAndEta[i];
-            if ((gameStartTime + tuple.Item2) - UnixTime.GetUnixTime(DateTime.Now) < 700)
+            long timeTillNext = (gameStartTime + tuple.Item2) - UnixTime.GetUnixTime(DateTime.Now);
+            if (Mathf.Abs(timeTillNext) < 700)
             {
                 currentPlanet = tuple.Item1;
-                if (PlanetsAndEta.Count > i+1)
-                {
-                    nextPlanet = PlanetsAndEta[i + 1];
-                } else
-                {
-                    nextPlanet = new Tuple<Planets.Planet, long>(Planets.Planet.Space, 0);
-                }
+            }
+            
+        }
+
+        nextPlanet = new Tuple<Planets.Planet, long>(Planets.Planet.Space, 0);
+        for (int i = 0; i < PlanetsAndEta.Count; i++)
+        {
+            if ((gameStartTime + PlanetsAndEta[i].Item2) > UnixTime.GetUnixTime(DateTime.Now))
+            {
+                nextPlanet = PlanetsAndEta[i];
+                break;
             }
         }
     }

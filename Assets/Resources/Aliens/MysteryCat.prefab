@@ -58,7 +58,8 @@ MonoBehaviour:
   currentTime: 0
   TimeToDespawnAt: 0
   FavoritePlanet: 10
-  Description: Has just kind of here all the time. Not even sure if this is an alien.
+  Description: Has kinda just been here the whole time. Not even sure if this is
+    an alien.
 --- !u!114 &3465163633952380496
 MonoBehaviour:
   m_ObjectHideFlags: 0

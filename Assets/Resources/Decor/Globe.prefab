@@ -92,6 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PossibleAliensToSpawn:
   - {fileID: 1219812648074380301, guid: ff02e61efe868f04cb0498111ca63d92, type: 3}
+  - {fileID: 4309636689038541028, guid: 99449b19ba63a7047a6df97b802f8f0b, type: 3}
   PossibleAliensToSpawnMoon: []
   AlienAttached: {fileID: 0}
 --- !u!61 &8855708612183282442

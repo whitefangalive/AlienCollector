@@ -176,5 +176,5 @@ MonoBehaviour:
   decorAttachedTo: {fileID: 0}
   currentTime: 0
   TimeToDespawnAt: 0
-  FavoritePlanet: 0
+  FavoritePlanet: 8
   Description: Made of a viscous goop, Kind of like an eyeball.

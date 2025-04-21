@@ -48,7 +48,7 @@ public class MoveCameraAndScale : MonoBehaviour
         }
         if (pressed.ButtonpressedRecently)
         {
-            transform.position = new Vector3(Mathf.Clamp(cameraPositionOrigin.x + (positionDifference.x * speed.x), clamp.position.x, 0), Mathf.Clamp(cameraPositionOrigin.y + (positionDifference.y * speed.y), clamp.position.y, 0), transform.position.z);
+            transform.position = new Vector3(Mathf.Clamp(cameraPositionOrigin.x + (positionDifference.x * speed.x), clamp.position.x, -clamp.position.x), Mathf.Clamp(cameraPositionOrigin.y + (positionDifference.y * speed.y), clamp.position.y, -clamp.position.y), transform.position.z);
         }
         
     }
