@@ -26,17 +26,7 @@ public class ChangeSceneTo : MonoBehaviour
         
     }
 
-    private void playAudioClip(AudioClip clip)
-    {
-        GameObject obj = new GameObject("AudioSource");
-        AudioSource newSource = obj.AddComponent<AudioSource>();
-        newSource.volume = PlayerPrefs.GetFloat("effectsVolume");
-        newSource.playOnAwake = false;
-        obj.AddComponent<DestroyOnAudioSourceEnd>();
-        obj.AddComponent<dontDestroyOnLoad>();
-        newSource.clip = clip;
-        newSource.Play();
-    }
+
 
     private bool IsInScene(string sceneName)
     {

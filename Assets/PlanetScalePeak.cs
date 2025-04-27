@@ -8,7 +8,7 @@ public class PlanetScalePeak : MonoBehaviour
     public int peakTime = 4320;
     private Vector3 originalScale;
     private PlayerStats ps;
-    public float scaleAmount = 0.01f;
+    public float scaleAmount = 0.001f;
     public float totalMinutes;
     // Start is called before the first frame update
     void Start()

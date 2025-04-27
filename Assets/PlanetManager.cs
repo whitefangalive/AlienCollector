@@ -18,6 +18,7 @@ public class PlanetManager : MonoBehaviour
         PlanetsAndEta.Add(new Tuple<Planets.Planet, long>(Planets.Planet.Mars, UnixTime.GetUnixTimeMinutes(8640)));
         PlanetsAndEta.Add(new Tuple<Planets.Planet, long>(Planets.Planet.Astroids, UnixTime.GetUnixTimeMinutes(12960)));
         PlanetsAndEta.Add(new Tuple<Planets.Planet, long>(Planets.Planet.Jupiter, UnixTime.GetUnixTimeMinutes(15840)));
+        PlanetsAndEta.Add(new Tuple<Planets.Planet, long>(Planets.Planet.Saturn, UnixTime.GetUnixTimeMinutes(20160)));
     }
 
     private void Update()
