@@ -18,6 +18,7 @@ public class PlayerStats : MonoBehaviour
         }
     }
     //to be saved
+    //placemat decoration Dictionary<ThePlaceMat, TheObject>
     public Dictionary<string, string> PlacematDecorations = new Dictionary<string, string>();
     public int Scrap;
     public List<Tuple<string, int>> Cows = new List<Tuple<string, int>>();
@@ -34,6 +35,11 @@ public class PlayerStats : MonoBehaviour
     public List<Tuple<string, int>> AlienGifts = new List<Tuple<string, int>>();
     public List<string> DiscoveredAliens = new List<string>();
     public long GameStartTime;
+    //timer for spawning scrap and cows outside the window
+    public float SpawningTimer;
+
+    //planet name and theta
+    public Dictionary<string, float> PlanetTheta = new Dictionary<string, float>();
 
     public int TutorialState;
 
@@ -41,7 +47,10 @@ public class PlayerStats : MonoBehaviour
 
     void OnApplicationPause(bool pauseStatus)
     {
-        TimeLeftGame = UnixTime.GetUnixTime(DateTime.Now);
+        if (pauseStatus ==  true)
+        {
+            TimeLeftGame = UnixTime.GetUnixTime(DateTime.Now);
+        }
         SaveManager.saveData(this);
     }
 

@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4961593878698733008}
   - component: {fileID: 1970343520088484835}
   - component: {fileID: 8886116475438135201}
+  - component: {fileID: 4463964662755892838}
+  - component: {fileID: 6512828200937739482}
   m_Layer: 5
   m_Name: Fish
   m_TagString: Untagged
@@ -103,6 +105,43 @@ MonoBehaviour:
   TimeToDespawnAt: 0
   FavoritePlanet: 0
   Description: Tries really hard but can never quite fit in.
+--- !u!114 &4463964662755892838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2178089360802071253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aba181efaac965548a67c19c0bde2c5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fade: 0
+--- !u!114 &6512828200937739482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2178089360802071253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c8b5368b7f86d647a362b9565b30917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Color: {r: 1, g: 1, b: 1, a: 1}
+  HoverColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLetGo:
+    m_PersistentCalls:
+      m_Calls: []
+  clicking: 0
+  canvas: {fileID: 0}
+  canvasName: WorldSpaceCanvas
+  moveSensativity: 0.5
 --- !u!1 &7867197464835026032
 GameObject:
   m_ObjectHideFlags: 0

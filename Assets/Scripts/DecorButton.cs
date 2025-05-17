@@ -14,6 +14,7 @@ public class DecorButton : MonoBehaviour
     public TMP_Text costText;
     private PlayerStats ps;
     public TMP_Text Quantity;
+    public GameObject PlacedText;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,19 +42,25 @@ public class DecorButton : MonoBehaviour
             }
             
         }
+        if (PlacedText != null)
+        {
+            if (ps.PlacematDecorations.ContainsValue(ContainedObject.name))
+            {PlacedText.SetActive(true);} else
+            {PlacedText.SetActive(false);}
+        }
     }
 
     public void triggerPurchase()
     {
         if (ps.Scrap >= cost)
         {
-            ps.Scrap -= cost;
             if (ps.OwnedItems == null)
             {
                 ps.OwnedItems = new List<string>();
             }
             if (!ps.OwnedItems.Contains(ContainedObject.name))
             {
+                ps.Scrap -= cost;
                 ps.OwnedItems.Add(ContainedObject.name);
                 LockButton lbo = GetComponent<LockButton>();
                 if (lbo != null)

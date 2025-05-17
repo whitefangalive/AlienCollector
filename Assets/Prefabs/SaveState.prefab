@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2926138590581687278}
   - component: {fileID: 2775951205244835564}
   - component: {fileID: 5967182250760704674}
+  - component: {fileID: 8061224780622389521}
   m_Layer: 0
   m_Name: SaveState
   m_TagString: SaveState
@@ -67,6 +68,7 @@ MonoBehaviour:
   OwnedItems: []
   DiscoveredAliens: []
   GameStartTime: 0
+  SpawningTimer: 0
   TutorialState: 0
   TimeScale: 1
 --- !u!114 &2926138590581687278
@@ -108,3 +110,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentPlanet: 0
   gameStartTime: 0
+--- !u!114 &8061224780622389521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8408413186244732363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c2b9eba0cf4efa46b6025f2ce7eb39e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

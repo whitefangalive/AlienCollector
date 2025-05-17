@@ -86,6 +86,8 @@ GameObject:
   - component: {fileID: 4638099835995737026}
   - component: {fileID: 8205003671686637904}
   - component: {fileID: 2405638638384535725}
+  - component: {fileID: 6905906301721782034}
+  - component: {fileID: 451190458961572666}
   m_Layer: 5
   m_Name: Dropy
   m_TagString: Untagged
@@ -178,3 +180,40 @@ MonoBehaviour:
   TimeToDespawnAt: 0
   FavoritePlanet: 8
   Description: Made of a viscous goop, Kind of like an eyeball.
+--- !u!114 &6905906301721782034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4133636670137209037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aba181efaac965548a67c19c0bde2c5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fade: 0
+--- !u!114 &451190458961572666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4133636670137209037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c8b5368b7f86d647a362b9565b30917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Color: {r: 1, g: 1, b: 1, a: 1}
+  HoverColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLetGo:
+    m_PersistentCalls:
+      m_Calls: []
+  clicking: 0
+  canvas: {fileID: 0}
+  canvasName: WorldSpaceCanvas
+  moveSensativity: 0.5

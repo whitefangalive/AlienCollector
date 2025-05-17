@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -15.00391}
+  m_AnchoredPosition: {x: 0, y: 2.100006}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4649327941280940315
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -91,6 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PossibleAliensToSpawn:
   - {fileID: 9052093949495746111, guid: 9b30c3f75a33dea408932b02282bb6c5, type: 3}
+  - {fileID: 3423134374928846347, guid: ac261b8b46706be4ea160d645a14042a, type: 3}
   PossibleAliensToSpawnMoon: []
   AlienAttached: {fileID: 0}
 --- !u!70 &6820443405705747759

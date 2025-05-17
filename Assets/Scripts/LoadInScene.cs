@@ -34,7 +34,6 @@ public class LoadInScene : MonoBehaviour
         GameObject pso = GameObject.FindGameObjectWithTag("SaveState");
         if (spawner == null)
         {
-            Debug.Log("Setting Spawner");
             spawner = pso.GetComponent<AlienSpawner>();
         }
     }
@@ -52,5 +51,7 @@ public class LoadInScene : MonoBehaviour
         ps.DiscoveredAliens = save.discoveredAliens;
         ps.TutorialState = save.tutorialState;
         ps.GameStartTime = save.gameStartTime;
+        ps.PlanetTheta = save.planetTheta;
+        ps.SpawningTimer = save.spawningTimer;
     }
 }

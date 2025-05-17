@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,7 +14,9 @@ public class ChangeSceneTo : MonoBehaviour
         {
             //GameObject.Find("SaveState").GetComponent<SaveManager>().saveData();
         }
-        //playAudioClip(Resources.Load<AudioClip>("ButtonPress"));
+        AudioManager.playAudioClip(Resources.Load<AudioClip>("Tap"));
+        createSoundImage("Tap");
+
         if (!fade)
         {
             SceneManager.LoadScene(SceneName);
@@ -23,11 +26,16 @@ public class ChangeSceneTo : MonoBehaviour
             GameObject fader = Instantiate(Resources.Load("Fader") as GameObject, GameObject.Find("Canvas").transform);
             fader.GetComponent<FadeEffect>().SceneGoingTo = SceneName;
         }
-        
     }
 
 
-
+    public void createSoundImage(string word)
+    {
+        GameObject textTemplate = Instantiate(Resources.Load<GameObject>("SoundAnimation"), transform.position, transform.rotation);
+        textTemplate.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-10, 10), Random.Range(-10, 10));
+        textTemplate.GetComponentInChildren<TMP_Text>().text = word;
+        textTemplate.GetComponent<Animator>().speed = 1.5f;
+    }
     private bool IsInScene(string sceneName)
     {
         Scene ddol = SceneManager.GetSceneByName("DontDestroyOnLoad");

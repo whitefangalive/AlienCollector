@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5206449003495325080}
   - component: {fileID: 5190537928421914813}
   - component: {fileID: 4807513152754704279}
+  - component: {fileID: 1203382573554539847}
+  - component: {fileID: 4603274201615158295}
   m_Layer: 5
   m_Name: Gnorp
   m_TagString: Untagged
@@ -103,6 +105,43 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1203382573554539847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342136646366859933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aba181efaac965548a67c19c0bde2c5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fade: 0
+--- !u!114 &4603274201615158295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342136646366859933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c8b5368b7f86d647a362b9565b30917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Color: {r: 1, g: 1, b: 1, a: 1}
+  HoverColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLetGo:
+    m_PersistentCalls:
+      m_Calls: []
+  clicking: 0
+  canvas: {fileID: 0}
+  canvasName: WorldSpaceCanvas
+  moveSensativity: 0.5
 --- !u!1 &4994216061339718077
 GameObject:
   m_ObjectHideFlags: 0

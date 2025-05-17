@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -92,6 +92,7 @@ MonoBehaviour:
   PossibleAliensToSpawn:
   - {fileID: 2404014396333546773, guid: 7cc7e6c670fbe104fafd56429fafa7a2, type: 3}
   - {fileID: 3907347587599803529, guid: 8e6b26e8eb2f5ca419d9d81321a2f5dc, type: 3}
+  - {fileID: 8997067857521123251, guid: 1a32588ac0ad3c342ba935e54e41f46b, type: 3}
   PossibleAliensToSpawnMoon: []
   AlienAttached: {fileID: 0}
 --- !u!61 &5322518080555115331

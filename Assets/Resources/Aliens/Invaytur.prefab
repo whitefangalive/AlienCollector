@@ -100,6 +100,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4726086101848648022, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
+      propertyPath: canvasName
+      value: WorldSpaceCanvas
+      objectReference: {fileID: 0}
     - target: {fileID: 4795151850392877532, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
       propertyPath: alienName
       value: Invaytur

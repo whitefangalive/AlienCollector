@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8910259054902942403}
     m_Modifications:
+    - target: {fileID: 1664049003440131927, guid: dbe7f9999c5183845b4adf2f775dc3fd, type: 3}
+      propertyPath: canvasName
+      value: WorldSpaceCanvas
+      objectReference: {fileID: 0}
     - target: {fileID: 3858737468590882781, guid: dbe7f9999c5183845b4adf2f775dc3fd, type: 3}
       propertyPath: m_Name
       value: LampShadow
@@ -209,6 +213,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 4795151850392877532, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
     - {fileID: 7381189270554538218, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
+    - {fileID: 4726086101848648022, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1160440101320685433, guid: 7d5113f781e2a174b9a7eb92a95db77e, type: 3}
     m_AddedGameObjects:

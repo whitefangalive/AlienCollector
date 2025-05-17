@@ -14,6 +14,7 @@ public class MoveObjectToLocation : MonoBehaviour
     public bool toggle = false;
     public bool scale = false;
     public float scaleSpeed = 0.1f;
+    public int atLocation = 0;
     private void Start()
     {
         foreach (Transform go in Locations)
@@ -38,6 +39,7 @@ public class MoveObjectToLocation : MonoBehaviour
         } else
         {
             GotoLocation[i] = true;
+            atLocation = i;
             for (int j = 0; j < Locations.Count; ++j)
             {
                 if (j != i)
@@ -46,11 +48,11 @@ public class MoveObjectToLocation : MonoBehaviour
                 }
             }
         }
-        
     }
     public void GoToLocationIndexWithoutToggle(int i)
     {
         GotoLocation[i] = true;
+        atLocation = i;
         for (int j = 0; j < Locations.Count; ++j)
         {
             if (j != i)

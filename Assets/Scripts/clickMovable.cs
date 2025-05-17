@@ -13,6 +13,8 @@ public class clickMovable : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public float scaleAmount = 1.2f;
     public float scaleSpeed = 10f;
     public RectTransform canvas;
+    public Button.ButtonClickedEvent OnGrab;
+    public Button.ButtonClickedEvent OnLetGo;
 
     [Tooltip("If not empty will switch object to this parent when picked up then return once let go.")]
     public Transform objectToSwitchParent;
@@ -27,6 +29,7 @@ public class clickMovable : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     private Vector3 lastTapperPosition;
     private Vector3 TapVelocity;
+    private List<MoveCamera> moveCameras = new List<MoveCamera>();
 
     private void Start()
     {
@@ -36,6 +39,25 @@ public class clickMovable : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         oldParent = transform.parent;
         lastTapperPosition = Input.mousePosition;
         image.color = Color;
+
+        //find top parent
+        Transform parent = transform.parent;
+        int deadmansSwitch = 0;
+        while (canvas == null && parent != null && deadmansSwitch < 25)
+        {
+            deadmansSwitch++;
+            if (parent.GetComponent<Canvas>() != null)
+            {
+                canvas = parent.GetComponent<RectTransform>();
+            } 
+            else
+            {
+                parent = parent.parent;
+            }
+        }
+
+        //find cameras to lock;
+        moveCameras = new List<MoveCamera>(GameObject.FindObjectsOfType<MoveCamera>());
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -50,6 +72,11 @@ public class clickMovable : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        OnGrab.Invoke();
+        foreach (MoveCamera mc in moveCameras)
+        {
+            mc.HoldingObject = true;
+        }
         clicking = true;
 
         Vector2 localMousePos;
@@ -68,6 +95,10 @@ public class clickMovable : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerUp(PointerEventData eventData)
     {
         clicking = false;
+        foreach (MoveCamera mc in moveCameras)
+        {
+            mc.HoldingObject = false;
+        }
     }
 
     private void FixedUpdate()
@@ -94,6 +125,7 @@ public class clickMovable : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         }
         else
         {
+            
             if (needsToBeShrunk)
             {
                 rectTransform.localScale = Vector3.Lerp(rectTransform.localScale, startingScale, Time.deltaTime * scaleSpeed);
@@ -101,6 +133,7 @@ public class clickMovable : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 if (Vector3.Distance(rectTransform.localScale, startingScale) < 0.01f)
                 {
                     needsToBeShrunk = false;
+                    OnLetGo.Invoke();
 
                     if (objectToSwitchParent != null)
                     {

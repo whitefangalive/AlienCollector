@@ -18,6 +18,8 @@ public class SaveState
     public List<string> discoveredAliens = new List<string>();
     public int tutorialState;
     public long gameStartTime;
+    public Dictionary<string, float> planetTheta = new Dictionary<string, float>();
+    public float spawningTimer;
 
     public SaveState(PlayerStats ps) 
     {
@@ -33,5 +35,7 @@ public class SaveState
         discoveredAliens = ps.DiscoveredAliens;
         tutorialState = ps.TutorialState;
         gameStartTime = ps.GameStartTime;
+        planetTheta = ps.PlanetTheta;
+        spawningTimer = ps.SpawningTimer;
     }
 }

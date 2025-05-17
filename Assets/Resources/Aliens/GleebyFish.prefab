@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c939e2986cc91c14abbfe09b077bd503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alienName: Fish
+  alienName: GleebyFish
   strength: 20
   wealth: 7
   despawnTime: 0
