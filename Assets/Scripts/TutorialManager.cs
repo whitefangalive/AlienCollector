@@ -91,7 +91,7 @@ public class TutorialManager : MonoBehaviour
         }
         if (ps.TutorialState == 9 && ps.Aliens.Count > 0)
         {
-            dialogueManager.showBox("Congradulations! looks like " + ps.DiscoveredAliens[0] + " visted you! Tap on them to collect them!");
+            dialogueManager.showBox("Congratulations! looks like an alien visted you! Tap on them to collect them!");
             ps.TutorialState++;
         }
 

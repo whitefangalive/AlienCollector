@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,13 +31,30 @@ public class CowSpawner : MonoBehaviour
         {
             if (once)
             {
+                //check for broken cows
+                if (playerStats.Cows.Count > 0 && playerStats.Cows[0] == null)
+                {
+                    playerStats.Cows.Clear();
+                }
                 for (int i = 0; i < playerStats.Cows.Count; i++)
                 {
-                    if (Resources.Load<GameObject>(playerStats.Cows[i].Item1) != null) 
+                    if (playerStats.Cows[i] != null && 
+                        Resources.Load<GameObject>(playerStats.Cows[i].Item1) != null) 
                     {
                         GameObject spawnedDecoration = Instantiate(Resources.Load<GameObject>(playerStats.Cows[i].Item1), transform.position, transform.rotation, transform);
                         spawnedDecoration.name = playerStats.Cows[i].Item1;
                         spawnedDecoration.GetComponent<CowData>().risk = playerStats.Cows[i].Item2;
+                        var aType = playerStats.Cows[i].GetType();
+                        var numberOfGenericParameters = aType.GetGenericArguments().Length;
+                        if (playerStats.Cows[i].Item3 != null)
+                        {
+                            spawnedDecoration.GetComponent<CowData>().id = playerStats.Cows[i].Item3;
+                        } else
+                        {
+                            //assign id
+                            spawnedDecoration.GetComponent<CowData>().id = spawnedDecoration.GetInstanceID().ToString();
+                        }
+                        
                     } else
                     {
                         Debug.Log("Could not load in resource: " + playerStats.Cows[i].Item1);
@@ -51,7 +69,9 @@ public class CowSpawner : MonoBehaviour
                 placementManager.CurrentlyPlacingCow = false;
                 GameObject spawnedCow = Instantiate(placementManager.ObjectToPlace, transform.position, transform.rotation, transform);
                 spawnedCow.name = placementManager.ObjectToPlace.name;
-                playerStats.Cows.Add(new System.Tuple<string, int>(spawnedCow.name, 0));
+                string id = spawnedCow.GetInstanceID().ToString();
+                playerStats.Cows.Add(new Tuple<string, int, string>(spawnedCow.name, 0, id));
+                spawnedCow.GetComponent<CowData>().id = id;
             }
         }
     }

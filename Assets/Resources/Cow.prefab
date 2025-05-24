@@ -511,6 +511,7 @@ GameObject:
   - component: {fileID: 2086847184671010494}
   - component: {fileID: 7698399122702396406}
   - component: {fileID: 5836102972043805767}
+  - component: {fileID: 8750584544505641029}
   m_Layer: 6
   m_Name: Cow
   m_TagString: Cow
@@ -620,7 +621,7 @@ MonoBehaviour:
   speed: 0.25
   vel: {x: 0, y: 0}
   tapperVelocity: {x: 0, y: 0, z: 0}
-  velocityMultipler: 0.1
+  velocityMultipler: 0.14
   screenVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &4500175278850238253
 MonoBehaviour:
@@ -637,6 +638,7 @@ MonoBehaviour:
   risk: 0
   defense: 5
   scrollbar: {fileID: 3965447387879038398}
+  id: 
 --- !u!60 &4902216954812431772
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -863,6 +865,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8750584544505641029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2605014816210189361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f351f08f655d3d409e5465e2a09624b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multiplier: 1.1
+  bouncyMaterial: {fileID: 6200000, guid: 732d7f287fa459b47a788efa7510876e, type: 2}
+  normalMaterial: {fileID: 6200000, guid: b6c1ce72eaff262478f3ab0c7674d24d, type: 2}
 --- !u!1 &3766856619206366368
 GameObject:
   m_ObjectHideFlags: 0

@@ -36,7 +36,7 @@ public class FloatingScrapScript : MonoBehaviour
     {
         if (ps.OwnedCows.ContainsKey(cow.name))
         {
-            ps.OwnedCows.Add(cow.name, ps.OwnedCows[cow.name] + 1);
+            ps.OwnedCows[cow.name] += 1;
         } else
         {
             ps.OwnedCows.Add(cow.name, 1);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -20,11 +21,24 @@ public class LoadInScene : MonoBehaviour
         GameObject saveManager = GameObject.Find("SaveState");
         if (saveManager != null)
         {
-            string path = Application.persistentDataPath + "/game.save";
-            if (File.Exists(path))
+            //Application.platform == RuntimePlatform.WebGLPlayer
+            if (Application.platform == RuntimePlatform.WebGLPlayer)
             {
-                unpackData(SaveManager.loadData());
+                string name = "SaveData";
+                if (PlayerPrefs.HasKey(name))
+                {
+                    unpackData(SaveManager.loadData());
+                }
+            } 
+            else
+            {
+                string path = Application.persistentDataPath + "/game.save";
+                if (File.Exists(path))
+                {
+                    unpackData(SaveManager.loadData());
+                }
             }
+            
             ps.InitialLoaded = true;
             needsSpawnAlien = true;
         }
@@ -41,7 +55,10 @@ public class LoadInScene : MonoBehaviour
     {
         ps.PlacematDecorations = save.placematDecorations;
         ps.Scrap = save.scrap;
-        ps.Cows = save.cows;
+
+        if (save.cows != null && save.cows.GetType()  == typeof(List<Tuple<string, int, string>>))
+            ps.Cows = save.cows;
+
         ps.Aliens = save.aliens;
         ps.TimeTillCanSpawnAnAlien = save.timeTillCanSpawnAnAlien;
         ps.OwnedCows = save.ownedCows;
@@ -53,5 +70,6 @@ public class LoadInScene : MonoBehaviour
         ps.GameStartTime = save.gameStartTime;
         ps.PlanetTheta = save.planetTheta;
         ps.SpawningTimer = save.spawningTimer;
+        ps.MusicState = save.musicState;
     }
 }

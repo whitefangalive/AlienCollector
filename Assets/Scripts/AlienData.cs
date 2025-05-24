@@ -74,10 +74,12 @@ public class AlienData : MonoBehaviour
                 cow.GetComponent<CowData>().risk += (strength - cow.GetComponent<CowData>().defense);
                 for(int i = 0; i < ps.Cows.Count; i++)
                 {
-                    Tuple<string, int> thisCow = ps.Cows[i];
-                    if (thisCow.Item1 == cow.name)
+                    Tuple<string, int, string> thisCow = ps.Cows[i];
+                    //the cow being changed in save files is the same
+                    //type of cow the risk was changed for
+                    if (thisCow.Item1 == cow.name && thisCow.Item3 == cow.GetComponent<CowData>().id)
                     {
-                        ps.Cows[i] = new Tuple<string, int> (thisCow.Item1, cow.GetComponent<CowData>().risk);
+                        ps.Cows[i] = new Tuple<string, int, string> (thisCow.Item1, cow.GetComponent<CowData>().risk, thisCow.Item3);
                     }
                 }
             }

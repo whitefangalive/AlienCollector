@@ -13,6 +13,7 @@ public class ScrapSpawner : MonoBehaviour
     private PlayerStats ps;
     private bool once = true;
     List<GameObject> gameObjects = new List<GameObject>();
+    public Transform parent = null;
     private void Start()
     {
         currentSpawnRate = Random.Range(spawnRateMax, spawnRateMin);
@@ -32,7 +33,7 @@ public class ScrapSpawner : MonoBehaviour
                 once = false;
                 currentSpawnRate = Random.Range(spawnRateMax, spawnRateMin);
                 gameObjects.Add(Instantiate(ObjectToSpawn, new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y +
-                    Random.Range(-0.2f, 0.2f), transform.position.z), transform.rotation));
+                    Random.Range(-0.2f, 0.2f), transform.position.z), transform.rotation, parent));
 
                 gameObjects[gameObjects.Count - 1].GetComponent<ConstantlyMove>().Direction = transform.rotation * direction;
 

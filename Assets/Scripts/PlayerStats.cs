@@ -2,12 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
     public bool InitialLoaded = false;
+    public bool AllowSpawnAliens = true;
+    public int MusicStateCount;
+
     //I need to calculate time since you closed the app, gotten when app opens
 
     private void Update()
@@ -21,7 +25,8 @@ public class PlayerStats : MonoBehaviour
     //placemat decoration Dictionary<ThePlaceMat, TheObject>
     public Dictionary<string, string> PlacematDecorations = new Dictionary<string, string>();
     public int Scrap;
-    public List<Tuple<string, int>> Cows = new List<Tuple<string, int>>();
+    //cowtype, risk, id
+    public List<Tuple<string, int, string>> Cows = new List<Tuple<string, int, string>>();
     // time when to despawn, Object attached to, alien name
     public List<Tuple<long, string, string>> Aliens = new List<Tuple<long, string, string>>();
     // DateTime.Now in unix; the alien will have a time when it is supposed to despawn, say it will leave at 12
@@ -43,18 +48,23 @@ public class PlayerStats : MonoBehaviour
 
     public int TutorialState;
 
+    public int MusicState;
+
     public float TimeScale = 1;
 
     void OnApplicationPause(bool pauseStatus)
     {
         if (pauseStatus ==  true)
         {
-            TimeLeftGame = UnixTime.GetUnixTime(DateTime.Now);
+            save();
         }
-        SaveManager.saveData(this);
     }
 
     private void OnApplicationQuit()
+    {
+        save();
+    }
+    public void save()
     {
         TimeLeftGame = UnixTime.GetUnixTime(DateTime.Now);
         SaveManager.saveData(this);

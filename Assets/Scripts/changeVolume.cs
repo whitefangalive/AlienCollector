@@ -19,18 +19,21 @@ public class changeVolume : MonoBehaviour
     void Start()
     {
         AS = GetComponent<AudioSource>();
-        originalVolume = AS.volume;
-        switch (type)
+        if (AS != null )
         {
-            case SoundType.AMBIENT:
-                AS.volume = originalVolume * PlayerPrefs.GetFloat("ambientVolume");
-                break;
-            case SoundType.EFFECTS:
-                AS.volume = originalVolume * PlayerPrefs.GetFloat("effectsVolume");
-                break;
-            default:
-                AS.volume = originalVolume;
-                break;
+            originalVolume = AS.volume;
+            switch (type)
+            {
+                case SoundType.AMBIENT:
+                    AS.volume = originalVolume * PlayerPrefs.GetFloat("ambientVolume");
+                    break;
+                case SoundType.EFFECTS:
+                    AS.volume = originalVolume * PlayerPrefs.GetFloat("effectsVolume");
+                    break;
+                default:
+                    AS.volume = originalVolume;
+                    break;
+            }
         }
     }
     public void updateSound()
@@ -46,6 +49,13 @@ public class changeVolume : MonoBehaviour
             default:
                 AS.volume = originalVolume;
                 break;
+        }
+    }
+    private void FixedUpdate()
+    {
+        if (AS != null)
+        {
+            updateSound();
         }
     }
 }

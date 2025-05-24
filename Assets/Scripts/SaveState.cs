@@ -8,7 +8,7 @@ public class SaveState
 {
     public Dictionary<string, string> placematDecorations = new Dictionary<string, string>();
     public int scrap;
-    public List<Tuple<string, int>> cows = new List<Tuple<string, int>>();
+    public List<Tuple<string, int, string>> cows = new List<Tuple<string, int, string>>();
     public List<Tuple<long, string, string>> aliens = new List<Tuple<long, string, string>>();
     public long timeTillCanSpawnAnAlien;
     public Dictionary<string, int> ownedCows = new Dictionary<string, int>();
@@ -20,6 +20,7 @@ public class SaveState
     public long gameStartTime;
     public Dictionary<string, float> planetTheta = new Dictionary<string, float>();
     public float spawningTimer;
+    public int musicState;
 
     public SaveState(PlayerStats ps) 
     {
@@ -37,5 +38,6 @@ public class SaveState
         gameStartTime = ps.GameStartTime;
         planetTheta = ps.PlanetTheta;
         spawningTimer = ps.SpawningTimer;
+        musicState = ps.MusicState;
     }
 }

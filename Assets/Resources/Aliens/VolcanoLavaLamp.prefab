@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1517857500114013600, guid: 7ebe73a2a95612e4b94e6d60cd20c62f, type: 3}
       propertyPath: m_Name
-      value: Volcano
+      value: GlopLamp
       objectReference: {fileID: 0}
     - target: {fileID: 5760592901772419749, guid: 7ebe73a2a95612e4b94e6d60cd20c62f, type: 3}
       propertyPath: m_Pivot.x

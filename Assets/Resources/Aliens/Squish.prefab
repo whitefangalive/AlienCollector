@@ -179,7 +179,7 @@ MonoBehaviour:
   currentTime: 0
   TimeToDespawnAt: 0
   FavoritePlanet: 0
-  Description: Dispite its name, its solid metal.
+  Description: Despite its name, its solid metal.
 --- !u!114 &8098364263540200718
 MonoBehaviour:
   m_ObjectHideFlags: 0

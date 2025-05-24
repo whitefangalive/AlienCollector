@@ -9,6 +9,7 @@ public class CowData : MonoBehaviour
     private PlayerStats ps;
     public int defense = 1;
     public Scrollbar scrollbar;
+    public string id;
     // Update is called once per frame
     void Update()
     {

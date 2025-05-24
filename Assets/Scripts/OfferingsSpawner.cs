@@ -52,9 +52,11 @@ public class OfferingsSpawner : MonoBehaviour
             items[i].GetComponentInChildren<OfferingsContainer>().costText.text = itemG.Item2.ToString();
             Debug.Log("Aliens/" + itemG.Item1);
             GameObject alienImg = Resources.Load<GameObject>("Aliens/" + itemG.Item1);
-            
-            items[i].GetComponentInChildren<OfferingsContainer>().image.sprite = alienImg.GetComponentInChildren<Button>().targetGraphic.gameObject.GetComponent<Image>().sprite;
+
             items[i].GetComponentInChildren<OfferingsContainer>().nameText.text = alienImg.GetComponentInChildren<AlienData>().alienName;
+            GameObject alienname = Resources.Load<GameObject>("Aliens/" + alienImg.GetComponentInChildren<AlienData>().alienName);
+            items[i].GetComponentInChildren<OfferingsContainer>().image.sprite = alienname.GetComponentInChildren<Button>().targetGraphic.gameObject.GetComponent<Image>().sprite;
+            
             items[i].GetComponentInChildren<OfferingsContainer>().number = i;
         }
 

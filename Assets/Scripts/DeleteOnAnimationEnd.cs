@@ -6,6 +6,7 @@ public class DeleteOnAnimationEnd : MonoBehaviour
 {
     private Animator animator;
     private AnimatorStateInfo animStateInfo;
+    public string specifcStateName = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +17,20 @@ public class DeleteOnAnimationEnd : MonoBehaviour
     void Update()
     {
         animStateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        if (animStateInfo.normalizedTime >= 1.0f)
+        if (specifcStateName == null) {
+            if (animStateInfo.normalizedTime >= 1.0f)
+            {
+                Destroy(gameObject);
+            }
+        } else
         {
-            Destroy(gameObject);
+            if (animStateInfo.IsName(specifcStateName))
+            {
+                if (animStateInfo.normalizedTime >= 1.0f)
+                {
+                    Destroy(gameObject);
+                }
+            }
         }
     }
 }

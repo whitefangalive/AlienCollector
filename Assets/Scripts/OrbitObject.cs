@@ -35,7 +35,11 @@ public class OrbitObject : MonoBehaviour
         
         if (savePosition)
         {
-            if (!ps.PlanetTheta.ContainsKey(objectName))
+            if (ps.PlanetTheta == null)
+            {
+                ps.PlanetTheta = new Dictionary<string, float>();
+            }
+            if (ps.PlanetTheta != null && !ps.PlanetTheta.ContainsKey(objectName))
             {
                 ps.PlanetTheta.Add(objectName, theta);
             }
@@ -53,7 +57,7 @@ public class OrbitObject : MonoBehaviour
         {
             mposition = GetComponent<RectTransform>().position;
             oposition = objectToOrbit.GetComponent<RectTransform>().position;
-            if (savePosition && ps.PlanetTheta.ContainsKey(objectName))
+            if (savePosition && ps.PlanetTheta != null && ps.PlanetTheta.ContainsKey(objectName) && ps != null)
             {
                 ps.PlanetTheta[objectName] += ((3.14f * 4) / 100) / speed;
                 transform.position = Vector3.Lerp(mposition, new Vector3(oposition.x + distance * Mathf.Cos(ps.PlanetTheta[objectName]), oposition.y + distance * Mathf.Sin(ps.PlanetTheta[objectName]), transform.position.z), lerpAmount);

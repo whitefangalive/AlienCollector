@@ -156,9 +156,10 @@ public class PlacematScript : MonoBehaviour
             int rand = UnityEngine.Random.Range(0, 2);
             for (int i = 0; i < amountOfAliensToSpawn; ++i)
             {
+                rand = UnityEngine.Random.Range(0, 2);
                 if (rand == 0)
                 {
-                rand = UnityEngine.Random.Range(0, 2);
+                
                 FileLogger.Log("Cows Count: " + ps.Cows.Count);
                     if (ps.Cows.Count > 0)
                     {
@@ -188,10 +189,10 @@ public class PlacematScript : MonoBehaviour
                                 cow.GetComponent<CowData>().risk += (30 - cow.GetComponent<CowData>().defense);
                                 for (int j = 0; j < ps.Cows.Count; j++)
                                 {
-                                    Tuple<string, int> thisCow = ps.Cows[j];
+                                    Tuple<string, int, string> thisCow = ps.Cows[j];
                                     if (thisCow.Item1 == cow.name)
                                     {
-                                        ps.Cows[j] = new Tuple<string, int>(thisCow.Item1, cow.GetComponent<CowData>().risk);
+                                        ps.Cows[j] = new Tuple<string, int, string>(thisCow.Item1, cow.GetComponent<CowData>().risk, thisCow.Item3);
                                     }
                                 }
                             }
@@ -203,6 +204,10 @@ public class PlacematScript : MonoBehaviour
                         {
                             break;
                         }
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
             }
