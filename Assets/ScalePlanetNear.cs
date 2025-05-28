@@ -3,17 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlanetScalePeak : MonoBehaviour
+public class ScalePlanetNear : MonoBehaviour
 {
-    public int peakTime = 4320;
     private Vector3 originalScale;
     private PlayerStats ps;
     public float scaleAmount = 0.001f;
     public float totalMinutes;
+    public string planetName = string.Empty;
     // Start is called before the first frame update
     void Start()
     {
         originalScale = transform.localScale;
+        transform.localScale = Vector3.zero;
+        if (planetName == string.Empty)
+        {
+            planetName = gameObject.name;
+        }
     }
 
     // Update is called once per frame
@@ -23,11 +28,14 @@ public class PlanetScalePeak : MonoBehaviour
         {
             ps = GameObject.Find("SaveState").GetComponent<PlayerStats>();
         }
-        DateTime eta = getEta(UnixTime.GetUnixTimeMinutes(peakTime));
-        TimeSpan Difference = eta - DateTime.Now;
-        totalMinutes = (float)Difference.TotalMinutes;
+        DateTime eta = DateTime.UnixEpoch;
+        if (ps.TravelLocation != null && ps.TravelLocation.Item1 == planetName)
+        {
+            eta = UnixTime.GetDateTime(ps.TravelLocation.Item2);
+        }
+        TimeSpan Difference = eta - UnixTime.GetDateTime(UnixTime.Now());
+        totalMinutes = Mathf.Clamp((float)Difference.TotalMinutes, 0, Mathf.Infinity);
         float multiplier = Mathf.Clamp(1 - Mathf.Abs((float)Difference.TotalMinutes * scaleAmount), 0, Mathf.Infinity);
-        if (!ps.UpgradedShip)
         transform.localScale = new Vector3(originalScale.x * multiplier, originalScale.y * multiplier, originalScale.z);
     }
     public DateTime getEta(long offset)

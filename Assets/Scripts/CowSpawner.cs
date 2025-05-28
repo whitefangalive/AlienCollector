@@ -43,6 +43,7 @@ public class CowSpawner : MonoBehaviour
                     {
                         GameObject spawnedDecoration = Instantiate(Resources.Load<GameObject>(playerStats.Cows[i].Item1), transform.position, transform.rotation, transform);
                         spawnedDecoration.name = playerStats.Cows[i].Item1;
+                        spawnedDecoration.GetComponent<Animator>().enabled = false;
                         spawnedDecoration.GetComponent<CowData>().risk = playerStats.Cows[i].Item2;
                         var aType = playerStats.Cows[i].GetType();
                         var numberOfGenericParameters = aType.GetGenericArguments().Length;

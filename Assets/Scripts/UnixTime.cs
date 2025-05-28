@@ -18,4 +18,8 @@ public static class UnixTime
     {
         return (minutes * 60);
     }
+    public static long Now()
+    {
+        return GetUnixTime(DateTime.Now);
+    }
 }

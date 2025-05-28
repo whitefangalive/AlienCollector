@@ -10,6 +10,10 @@ public class PlanetManager : MonoBehaviour
     public Planets.Planet currentPlanet;
     public Tuple<Planets.Planet, long> nextPlanet;
     public long gameStartTime;
+    public int reverseTimeRN;
+    private bool onceSetPlanet = true;
+    private string previousTravelLocation;
+    private bool prevSetStartOnce = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,35 +25,86 @@ public class PlanetManager : MonoBehaviour
         PlanetsAndEta.Add(new Tuple<Planets.Planet, long>(Planets.Planet.Saturn, UnixTime.GetUnixTimeMinutes(20160))); 
         PlanetsAndEta.Add(new Tuple<Planets.Planet, long>(Planets.Planet.Uranus, UnixTime.GetUnixTimeMinutes(25920)));
         PlanetsAndEta.Add(new Tuple<Planets.Planet, long>(Planets.Planet.Neptune, UnixTime.GetUnixTimeMinutes(33120)));
+        //for upgraded behavior
+        
     }
 
     private void Update()
     {
+        
+
+        reverseTimeRN = (int)(UnixTime.GetUnixTime(DateTime.Now) - gameStartTime) / 60;
         if (ps == null)
         {
             ps = GameObject.Find("SaveState").GetComponent<PlayerStats>();
         }
         gameStartTime = ps.GameStartTime;
-        currentPlanet = Planets.Planet.Space;
-        for (int i = 0; i < PlanetsAndEta.Count; i++)
+        if (ps.TravelLocation != null && prevSetStartOnce && ps != null)
         {
-            Tuple<Planets.Planet, long> tuple = PlanetsAndEta[i];
-            long timeTillNext = (gameStartTime + tuple.Item2) - UnixTime.GetUnixTime(DateTime.Now);
-
-            if (Mathf.Abs(timeTillNext) < UnixTime.GetUnixTimeMinutes(600))
-            {
-                currentPlanet = tuple.Item1;
-            }
-            
+            prevSetStartOnce = false;
+            previousTravelLocation = ps.TravelLocation.Item1;
         }
-
-        nextPlanet = new Tuple<Planets.Planet, long>(Planets.Planet.Space, 0);
-        for (int i = 0; i < PlanetsAndEta.Count; i++)
+        if (!ps.UpgradedShip)
         {
-            if ((gameStartTime + PlanetsAndEta[i].Item2) > UnixTime.GetUnixTime(DateTime.Now))
+            currentPlanet = Planets.Planet.Space;
+            for (int i = 0; i < PlanetsAndEta.Count; i++)
             {
-                nextPlanet = PlanetsAndEta[i];
-                break;
+                Tuple<Planets.Planet, long> tuple = PlanetsAndEta[i];
+                long timeTillNext = (gameStartTime + tuple.Item2) - UnixTime.GetUnixTime(DateTime.Now);
+
+                if (Mathf.Abs(timeTillNext) < UnixTime.GetUnixTimeMinutes(600))
+                {
+                    currentPlanet = tuple.Item1;
+                }
+
+            }
+
+            nextPlanet = new Tuple<Planets.Planet, long>(Planets.Planet.Space, UnixTime.GetUnixTimeMinutes(35120));
+            for (int i = 0; i < PlanetsAndEta.Count; i++)
+            {
+                if ((gameStartTime + PlanetsAndEta[i].Item2) > UnixTime.GetUnixTime(DateTime.Now))
+                {
+                    nextPlanet = PlanetsAndEta[i];
+                    break;
+                }
+            }
+        } else
+        {
+            if (ps.TravelLocation != null)
+            {
+                //I want to allow it to update current planet if you change travel locations
+                if (previousTravelLocation != ps.TravelLocation.Item1)
+                {
+                    previousTravelLocation = ps.TravelLocation.Item1;
+                    currentPlanet = Planets.Planet.Space;
+                    onceSetPlanet = true;
+                }
+
+                UpdateCurrentPlanet();
+            }
+        }
+    }
+
+    private void UpdateCurrentPlanet()
+    {
+        if (onceSetPlanet)
+        {
+            TimeSpan Difference = UnixTime.GetDateTime(ps.TravelLocation.Item2) - DateTime.Now;
+            // for some reason its always 5 hours and 14 seconds off
+            TimeSpan fixedTime = Difference - TimeSpan.FromMinutes(5 * 60);
+            //if you're 1 minute away update your current planet to this
+            if (fixedTime < TimeSpan.FromSeconds(2))
+            {
+                
+                int AmountOfCategories = System.Enum.GetValues(typeof(Planets.Planet)).Length;
+                for (int i = 0; i < AmountOfCategories; i++)
+                {
+                    Planets.Planet CurrentPlanet = (Planets.Planet)i;
+                    if (ps.TravelLocation.Item1 == CurrentPlanet.ToString())
+                    {
+                        currentPlanet = CurrentPlanet;
+                    }
+                }
             }
         }
     }

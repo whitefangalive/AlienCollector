@@ -17,7 +17,7 @@ public class DeleteOnAnimationEnd : MonoBehaviour
     void Update()
     {
         animStateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        if (specifcStateName == null) {
+        if (specifcStateName == null || specifcStateName == "") {
             if (animStateInfo.normalizedTime >= 1.0f)
             {
                 Destroy(gameObject);

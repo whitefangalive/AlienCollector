@@ -21,7 +21,7 @@ public class clickMovable : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     private Image image;
     private RectTransform rectTransform;
-    private bool clicking = false;
+    public bool clicking = false;
     private Vector3 startingScale;
     private Vector2 offset;
     private bool needsToBeShrunk = false;

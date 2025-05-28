@@ -52,6 +52,11 @@ public class PlayerStats : MonoBehaviour
 
     public float TimeScale = 1;
 
+    public bool UpgradedShip = false;
+    //locationName, ETA arriving, TimeLeft, Destination Coords of, startPositon coords
+    public Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>> TravelLocation;
+    public Tuple<float, float> TargetPosition;
+
     void OnApplicationPause(bool pauseStatus)
     {
         if (pauseStatus ==  true)

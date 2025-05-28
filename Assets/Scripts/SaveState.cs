@@ -21,6 +21,9 @@ public class SaveState
     public Dictionary<string, float> planetTheta = new Dictionary<string, float>();
     public float spawningTimer;
     public int musicState;
+    public bool upgradedShip;
+    public Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>> travelLocation;
+    public Tuple<float, float> targetPosition;
 
     public SaveState(PlayerStats ps) 
     {
@@ -39,5 +42,8 @@ public class SaveState
         planetTheta = ps.PlanetTheta;
         spawningTimer = ps.SpawningTimer;
         musicState = ps.MusicState;
+        upgradedShip = ps.UpgradedShip;
+        travelLocation = ps.TravelLocation;
+        targetPosition = ps.TargetPosition;
     }
 }

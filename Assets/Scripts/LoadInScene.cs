@@ -71,5 +71,8 @@ public class LoadInScene : MonoBehaviour
         ps.PlanetTheta = save.planetTheta;
         ps.SpawningTimer = save.spawningTimer;
         ps.MusicState = save.musicState;
+        ps.UpgradedShip = save.upgradedShip;
+        ps.TravelLocation = save.travelLocation;
+        ps.TargetPosition = save.targetPosition;
     }
 }
