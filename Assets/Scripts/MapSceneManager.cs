@@ -54,7 +54,7 @@ public class MapSceneManager : MonoBehaviour
                 //time i arrive - the time i left is the time spent traveling to my destination at the end of my trip
                 // now - the time i left is the time spent travelling so far
                 //so far taveled / full time to travel = % travelled
-                float amountAlongLine = (ps.TravelLocation.Item3 - UnixTime.Now()) / Mathf.Clamp(ps.TravelLocation.Item2 - ps.TravelLocation.Item3, Mathf.Epsilon, Mathf.Infinity);
+                float amountAlongLine = (ps.TravelLocation.Item3 - UnixTime.Now()) / Mathf.Clamp(Mathf.Abs(ps.TravelLocation.Item2 - ps.TravelLocation.Item3), Mathf.Epsilon, Mathf.Infinity);
 
                 Vector2 destination = Vector2.zero;
                 if (ps.TravelLocation.Item1 != "unknown" && ps.TravelLocation.Item1 != "Asteroids")
@@ -83,6 +83,10 @@ public class MapSceneManager : MonoBehaviour
                 if (Difference > TimeSpan.FromTicks(0))
                 {
                     spaceShip.transform.position = ConvertTupleToVector2(ps.TravelLocation.Item5) + ((ConvertTupleToVector2(ps.TravelLocation.Item5) - destination) * amountAlongLine);
+                } else
+                {
+                    if (ps.TravelLocation.Item1 == "unknown" || ps.TravelLocation.Item1 == "Asteroids")
+                    spaceShip.transform.position = destination;
                 }
             }
         }

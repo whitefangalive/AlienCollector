@@ -124,6 +124,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LuckyDuck
       objectReference: {fileID: 0}
+    - target: {fileID: 1502049954486907310, guid: c59f9bbc3303e134bbd8ddb856adaec7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad911e9d559c77c40a13ac9e4c367c31, type: 3}
     - target: {fileID: 6828394213603663979, guid: c59f9bbc3303e134bbd8ddb856adaec7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

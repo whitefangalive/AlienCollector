@@ -214,6 +214,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Direction: {x: 0, y: 0, z: 0}
+  lerping: 0
+  lerpForce: 1
 --- !u!114 &2344231664170471818
 MonoBehaviour:
   m_ObjectHideFlags: 0

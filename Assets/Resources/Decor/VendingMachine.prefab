@@ -95,6 +95,7 @@ MonoBehaviour:
   - {fileID: 4288488517625877429, guid: ad6ed5e5eefdec44abd1494b1fc54936, type: 3}
   - {fileID: 7664815316750563786, guid: 6d009afbda85fd4459ca2f6a24da5d5d, type: 3}
   - {fileID: 7150045297257338456, guid: 9e71ad303adb9564d869712ff2ee8a19, type: 3}
+  - {fileID: 8454154284683458317, guid: 2064a1600f922c443b0bd72b789e3db6, type: 3}
   PossibleAliensToSpawnMoon: []
   AlienAttached: {fileID: 0}
 --- !u!61 &3248496378958633881

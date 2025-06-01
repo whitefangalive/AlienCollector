@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &297918965459488622
+--- !u!1 &56424021433376608
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6828394213603663979}
-  - component: {fileID: 7780929653219930596}
-  - component: {fileID: 125081027558416215}
-  - component: {fileID: 7297945123729338808}
-  - component: {fileID: 7177799917637744629}
+  - component: {fileID: 3622298132211405697}
+  - component: {fileID: 7071874370236200382}
+  - component: {fileID: 7145186055937643171}
+  - component: {fileID: 3322048288071232233}
+  - component: {fileID: 920226619042578381}
   m_Layer: 5
-  m_Name: MonsterDuck
+  m_Name: Thestia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &6828394213603663979
+--- !u!224 &3622298132211405697
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 297918965459488622}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 56424021433376608}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3336931076314479617}
+  - {fileID: 496451351188660889}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 21, y: -29.699997}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7780929653219930596
+--- !u!114 &7071874370236200382
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 297918965459488622}
+  m_GameObject: {fileID: 56424021433376608}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -80,51 +80,51 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1502049954486907310}
+  m_TargetGraphic: {fileID: 7534417474616512356}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &125081027558416215
+--- !u!114 &7145186055937643171
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 297918965459488622}
+  m_GameObject: {fileID: 56424021433376608}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c939e2986cc91c14abbfe09b077bd503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alienName: MonsterDuck
+  alienName: Thestia
   strength: 20
-  wealth: 5
+  wealth: 25
   despawnTime: 0
   decorAttachedTo: {fileID: 0}
   currentTime: 0
   TimeToDespawnAt: 0
-  FavoritePlanet: 0
-  Description: A hopeless romantic. How... cute?
---- !u!114 &7297945123729338808
+  FavoritePlanet: 5
+  Description: The heartthrob of the galaxy.
+--- !u!114 &3322048288071232233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 297918965459488622}
+  m_GameObject: {fileID: 56424021433376608}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aba181efaac965548a67c19c0bde2c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fade: 0
---- !u!114 &7177799917637744629
+--- !u!114 &920226619042578381
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 297918965459488622}
+  m_GameObject: {fileID: 56424021433376608}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c8b5368b7f86d647a362b9565b30917, type: 3}
@@ -142,7 +142,7 @@ MonoBehaviour:
   canvas: {fileID: 0}
   canvasName: WorldSpaceCanvas
   moveSensativity: 0.5
---- !u!1 &6038575718745492558
+--- !u!1 &8703398424397593171
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,50 +150,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3336931076314479617}
-  - component: {fileID: 4241852616896152107}
-  - component: {fileID: 1502049954486907310}
+  - component: {fileID: 496451351188660889}
+  - component: {fileID: 2188730203000923199}
+  - component: {fileID: 7534417474616512356}
   m_Layer: 5
-  m_Name: SlorpoSprite
+  m_Name: FishSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &3336931076314479617
+--- !u!224 &496451351188660889
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6038575718745492558}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 8703398424397593171}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1483481, y: 1.1483481, z: 1.1483481}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6828394213603663979}
+  m_Father: {fileID: 3622298132211405697}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -77.7, y: 39.2}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &4241852616896152107
+--- !u!222 &2188730203000923199
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6038575718745492558}
+  m_GameObject: {fileID: 8703398424397593171}
   m_CullTransparentMesh: 1
---- !u!114 &1502049954486907310
+--- !u!114 &7534417474616512356
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6038575718745492558}
+  m_GameObject: {fileID: 8703398424397593171}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 63fdc1be6ed23c4419ab4a8d60df7473, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 706f309e9cb919a4bb1fe31792e3c065, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

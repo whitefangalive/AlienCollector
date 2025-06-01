@@ -11,7 +11,6 @@ public class PlanetManager : MonoBehaviour
     public Tuple<Planets.Planet, long> nextPlanet;
     public long gameStartTime;
     public int reverseTimeRN;
-    private bool onceSetPlanet = true;
     private string previousTravelLocation;
     private bool prevSetStartOnce = true;
     // Start is called before the first frame update
@@ -77,7 +76,6 @@ public class PlanetManager : MonoBehaviour
                 {
                     previousTravelLocation = ps.TravelLocation.Item1;
                     currentPlanet = Planets.Planet.Space;
-                    onceSetPlanet = true;
                 }
 
                 UpdateCurrentPlanet();
@@ -87,23 +85,19 @@ public class PlanetManager : MonoBehaviour
 
     private void UpdateCurrentPlanet()
     {
-        if (onceSetPlanet)
+
+        TimeSpan Difference = UnixTime.GetDateTime(ps.TravelLocation.Item2) - UnixTime.GetDateTime(UnixTime.Now());
+        //if you're 1 minute away update your current planet to this
+        if (Difference < TimeSpan.FromSeconds(2))
         {
-            TimeSpan Difference = UnixTime.GetDateTime(ps.TravelLocation.Item2) - DateTime.Now;
-            // for some reason its always 5 hours and 14 seconds off
-            TimeSpan fixedTime = Difference - TimeSpan.FromMinutes(5 * 60);
-            //if you're 1 minute away update your current planet to this
-            if (fixedTime < TimeSpan.FromSeconds(2))
-            {
                 
-                int AmountOfCategories = System.Enum.GetValues(typeof(Planets.Planet)).Length;
-                for (int i = 0; i < AmountOfCategories; i++)
+            int AmountOfCategories = System.Enum.GetValues(typeof(Planets.Planet)).Length;
+            for (int i = 0; i < AmountOfCategories; i++)
+            {
+                Planets.Planet CurrentPlanet = (Planets.Planet)i;
+                if (ps.TravelLocation.Item1 == CurrentPlanet.ToString())
                 {
-                    Planets.Planet CurrentPlanet = (Planets.Planet)i;
-                    if (ps.TravelLocation.Item1 == CurrentPlanet.ToString())
-                    {
-                        currentPlanet = CurrentPlanet;
-                    }
+                    currentPlanet = CurrentPlanet;
                 }
             }
         }

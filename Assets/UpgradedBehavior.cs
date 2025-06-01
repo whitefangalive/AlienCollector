@@ -11,8 +11,10 @@ public class UpgradedBehavior : MonoBehaviour
 {
     private clickMovable cm;
     public GameObject linePrefab;
+    private GameObject linePrefabTemp;
     private Vector2 startingSize;
     public GameObject SelectionPrefab;
+    private GameObject SelectionPrefabTemp;
     private PlayerStats ps;
     public float PlanetLockingThreshold = 0.5f;
     public Transform SpaceshipDesiredPos;
@@ -23,7 +25,7 @@ public class UpgradedBehavior : MonoBehaviour
     private long ETA = 0;
     public LaunchItemsContainer LIC;
 
-    private Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>> TempPosition;
+    private Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>> TempTravelLocation;
     private Tuple<float, float> tempTargetPositon;
     // Start is called before the first frame update
     void Start()
@@ -33,6 +35,11 @@ public class UpgradedBehavior : MonoBehaviour
         ps = FindObjectOfType<PlayerStats>();
         originalLerpSpeed = GetComponent<LerpToPosition>().speed;
 
+        linePrefabTemp = Instantiate(linePrefab, linePrefab.transform.position, linePrefab.transform.rotation, transform);
+        linePrefabTemp.GetComponent<Image>().color = new Color32(255, 255, 255, 125);
+
+        SelectionPrefabTemp = Instantiate(SelectionPrefab, linePrefab.transform.position, linePrefab.transform.rotation, transform);;
+        SelectionPrefabTemp.GetComponent<Image>().color = new Color32(255, 255, 255, 125);
     }
 
     // Update is called once per frame
@@ -47,44 +54,41 @@ public class UpgradedBehavior : MonoBehaviour
             {
                 ps.TravelLocation = new Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>>("", 0, UnixTime.Now(), ConvertVectorToTuple(SpaceshipDesiredPos.position), ConvertVectorToTuple(SpaceshipDesiredPos.position));
             }
-            if (TempPosition == null)
+            if (TempTravelLocation == null)
             {
-                TempPosition = new Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>>("", 0, UnixTime.Now(), ConvertVectorToTuple(SpaceshipDesiredPos.position), ConvertVectorToTuple(SpaceshipDesiredPos.position));
+                TempTravelLocation = new Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>>("", 0, UnixTime.Now(), ConvertVectorToTuple(SpaceshipDesiredPos.position), ConvertVectorToTuple(SpaceshipDesiredPos.position));
             }
 
-            if (TempPosition.Item1 == "")
+
+            //double if statements here because it needs to work
+            //for both travel location after and temp postion before launch
+            //its just the easiest way to see it
+            if (ps.TargetPosition != null && ps.TravelLocation.Item1 != "" && ConvertTupleToVector3(ps.TargetPosition) != SpaceshipDesiredPos.position &&
+            !(ps.TravelLocation.Item1 != "unknown" && ps.TravelLocation.Item1 != "" && Vector3.Distance(ConvertTupleToVector3(ps.TargetPosition), SpaceshipDesiredPos.position) < (PlanetLockingThreshold + 0.2f))
+            && !(Vector3.Distance(ConvertTupleToVector3(ps.TargetPosition), SpaceshipDesiredPos.position) < 0.1))
             {
-                //double if statements here because it needs to work
-                //for both travel location after and temp postion before launch
-                //its just the easiest way to see it
-                if (ps.TargetPosition != null && ps.TravelLocation.Item1 != "" && ConvertTupleToVector3(ps.TargetPosition) != SpaceshipDesiredPos.position &&
-                !(ps.TravelLocation.Item1 != "unknown" && ps.TravelLocation.Item1 != "" && Vector3.Distance(ConvertTupleToVector3(ps.TargetPosition), SpaceshipDesiredPos.position) < (PlanetLockingThreshold + 0.2f))
-                && !(Vector3.Distance(ConvertTupleToVector3(ps.TargetPosition), SpaceshipDesiredPos.position) < 0.1))
-                {
-                    linePrefab.SetActive(true);
-                    SelectionPrefab.SetActive(true);
-                }
-                else
-                {
-                    linePrefab.SetActive(false);
-                    SelectionPrefab.SetActive(false);
-                }
-            } 
+                linePrefab.SetActive(true);
+                SelectionPrefab.SetActive(true);
+            }
             else
             {
-                if (tempTargetPositon != null && TempPosition.Item1 != "" && ConvertTupleToVector3(tempTargetPositon) != SpaceshipDesiredPos.position &&
-                !(TempPosition.Item1 != "unknown" && TempPosition.Item1 != "" && Vector3.Distance(ConvertTupleToVector3(tempTargetPositon), SpaceshipDesiredPos.position) < (PlanetLockingThreshold + 0.2f))
+                linePrefab.SetActive(false);
+                SelectionPrefab.SetActive(false);
+            }
+
+
+                if (tempTargetPositon != null && TempTravelLocation.Item1 != "" && ConvertTupleToVector3(tempTargetPositon) != SpaceshipDesiredPos.position &&
+                !(TempTravelLocation.Item1 != "unknown" && TempTravelLocation.Item1 != "" && Vector3.Distance(ConvertTupleToVector3(tempTargetPositon), SpaceshipDesiredPos.position) < (PlanetLockingThreshold + 0.2f))
                 && !(Vector3.Distance(ConvertTupleToVector3(tempTargetPositon), SpaceshipDesiredPos.position) < 0.1))
                 {
-                    linePrefab.SetActive(true);
-                    SelectionPrefab.SetActive(true);
+                    linePrefabTemp.SetActive(true);
+                    SelectionPrefabTemp.SetActive(true);
                 }
                 else
                 {
-                    linePrefab.SetActive(false);
-                    SelectionPrefab.SetActive(false);
+                    linePrefabTemp.SetActive(false);
+                    SelectionPrefabTemp.SetActive(false);
                 }
-            }
             GetComponent<CustomButton>().enabled = false;
 
             if (cm.clicking)
@@ -103,12 +107,7 @@ public class UpgradedBehavior : MonoBehaviour
                 //set lerp to original that way ship flies back
                 GetComponent<LerpToPosition>().speed = originalLerpSpeed;
 
-                //if you aren't at a locaation yet or put your target too close to
-                //current pos then cancel
-                if (ps.TravelLocation.Item1 == "" || Vector3.Distance(ConvertTupleToVector3(ps.TargetPosition), SpaceshipDesiredPos.position) < 0.1)
-                {
-                    RemoveLine();
-                }
+                
                 
                 //special Case if you're watching and you hit your location land there
                 if (ps.TravelLocation.Item1 != "unknown" && ps.TravelLocation.Item1 != "" && Vector3.Distance(ConvertTupleToVector3(ps.TargetPosition), SpaceshipDesiredPos.position) < PlanetLockingThreshold)
@@ -119,38 +118,34 @@ public class UpgradedBehavior : MonoBehaviour
             }
 
             //lock desired onto its TempPos planet
-            if (TempPosition.Item1 != "" && TempPosition.Item1 != "unknown")
+            if (TempTravelLocation.Item1 != "" && TempTravelLocation.Item1 != "unknown")
             {
-                if (GameObject.Find(TempPosition.Item1) != null)
-                    tempTargetPositon = ConvertVectorToTuple(GameObject.Find(TempPosition.Item1).transform.position);
-            } else
+                if (GameObject.Find(TempTravelLocation.Item1) != null)
+                    tempTargetPositon = ConvertVectorToTuple(GameObject.Find(TempTravelLocation.Item1).transform.position);
+            }
+            //lock desired onto its planet
+            if (ps.TravelLocation.Item1 != "" && ps.TravelLocation.Item1 != "unknown")
             {
-                //lock desired onto its planet
-                if (ps.TravelLocation.Item1 != "" && ps.TravelLocation.Item1 != "unknown")
-                {
-                    if (GameObject.Find(ps.TravelLocation.Item1) != null)
-                        ps.TargetPosition = ConvertVectorToTuple(GameObject.Find(ps.TravelLocation.Item1).transform.position);
-                }
+                if (GameObject.Find(ps.TravelLocation.Item1) != null)
+                    ps.TargetPosition = ConvertVectorToTuple(GameObject.Find(ps.TravelLocation.Item1).transform.position);
             }
 
             //draw both lines
-            if (TempPosition.Item1 != "")
+            if (TempTravelLocation.Item1 != "")
             {
 
                 if (tempTargetPositon != null)
-                    drawLine(tempTargetPositon);
-            } else
-            {
-                if (ps.TargetPosition != null)
-                    drawLine(ps.TargetPosition);
-            } 
+                    ETA = drawLine(tempTargetPositon, linePrefabTemp, SelectionPrefabTemp);
+            }
+            if (ps.TargetPosition != null)
+                drawLine(ps.TargetPosition, linePrefab, SelectionPrefab);
         }
 
         //control if launchButton Appears
-        if (TempPosition != null && TempPosition.Item1 != "")
+        if (TempTravelLocation != null && TempTravelLocation.Item1 != "")
         {
             LIC.button.SetActive(true);
-            LIC.planetText.text = TempPosition.Item1;
+            LIC.planetText.text = TempTravelLocation.Item1;
         }
         else
         {
@@ -158,7 +153,7 @@ public class UpgradedBehavior : MonoBehaviour
         }
     }
 
-    private void drawLine(Tuple<float, float> currentTarget)
+    private long drawLine(Tuple<float, float> currentTarget, GameObject linePref, GameObject SelPref)
     {
         //do polar coordinates math here
         Vector2 differnece = ConvertTupleToVector3(currentTarget) - SpaceshipDesiredPos.position;
@@ -170,16 +165,17 @@ public class UpgradedBehavior : MonoBehaviour
         // Create the target rotation
         Quaternion targetRotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
 
-        linePrefab.transform.SetPositionAndRotation((Vector2)ConvertTupleToVector3(currentTarget) - (differnece / 2), targetRotation);
+        linePref.transform.SetPositionAndRotation((Vector2)ConvertTupleToVector3(currentTarget) - (differnece / 2), targetRotation);
         float distance = polarCords.x * startingSize.y;
-        linePrefab.GetComponent<RectTransform>().sizeDelta = new Vector2(startingSize.x, distance);
-        ETA = (long)(distance / shipSpeed) + UnixTime.Now();
+        linePref.GetComponent<RectTransform>().sizeDelta = new Vector2(startingSize.x, distance);
+        
 
         //lock selection onto target
         if (currentTarget != null)
         {
-            SelectionPrefab.transform.position = ConvertTupleToVector3(currentTarget);
+            SelPref.transform.position = ConvertTupleToVector3(currentTarget);
         }
+        return (long)(distance / shipSpeed) + UnixTime.Now();
     }
     private void detectAndLockOnPlanet()
     {
@@ -187,33 +183,30 @@ public class UpgradedBehavior : MonoBehaviour
         //lowercase because lowercase u looks better in coffeecake font
 
         
-        TempPosition = new Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>>("unknown", ETA, UnixTime.Now(), tempTargetPositon, ConvertVectorToTuple(SpaceshipDesiredPos.position));
+        TempTravelLocation = new Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>>("unknown", ETA, UnixTime.Now(), tempTargetPositon, ConvertVectorToTuple(SpaceshipDesiredPos.position));
         List<CircleCollider2D> circleCollider2Ds = new List<CircleCollider2D>(FindObjectsOfType<CircleCollider2D>());
         foreach (CircleCollider2D collider in circleCollider2Ds)
         {
             GameObject obj = collider.gameObject;
             if (Vector3.Distance(obj.transform.position, ConvertTupleToVector3(tempTargetPositon)) < PlanetLockingThreshold)
             {
-                TempPosition = new Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>>(obj.name, ETA, UnixTime.Now(), tempTargetPositon, ConvertVectorToTuple(SpaceshipDesiredPos.position));
+                TempTravelLocation = new Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>>(obj.name, ETA, UnixTime.Now(), tempTargetPositon, ConvertVectorToTuple(SpaceshipDesiredPos.position));
             }
         }
         //astriods edge case
         if (Vector3.Distance(ConvertTupleToVector3(tempTargetPositon), Vector3.zero) < 10 && Vector3.Distance(ConvertTupleToVector3(tempTargetPositon), Vector3.zero) > 9)
         {
-            TempPosition = new Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>>("Asteroids", ETA, UnixTime.Now(), tempTargetPositon, ConvertVectorToTuple(SpaceshipDesiredPos.position));
+            TempTravelLocation = new Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>>("Asteroids", ETA, UnixTime.Now(), tempTargetPositon, ConvertVectorToTuple(SpaceshipDesiredPos.position));
         }
     }
 
     public void Launch()
     {
-        ps.TravelLocation = new Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>>(TempPosition.Item1, ETA, UnixTime.Now(), tempTargetPositon, ConvertVectorToTuple(SpaceshipDesiredPos.position));
+        ps.TravelLocation = new Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>>(TempTravelLocation.Item1, ETA, UnixTime.Now(), tempTargetPositon, ConvertVectorToTuple(SpaceshipDesiredPos.position));
         ps.TargetPosition = tempTargetPositon;
-        TempPosition = new Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>>("", 0, 0, ConvertVectorToTuple(Vector2.zero), ConvertVectorToTuple(SpaceshipDesiredPos.position));
+        TempTravelLocation = new Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>>("", 0, 0, ConvertVectorToTuple(Vector2.zero), ConvertVectorToTuple(SpaceshipDesiredPos.position));
     }
-    private void RemoveLine()
-    {
-        ps.TravelLocation = new Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>>("", 0, 0, ConvertVectorToTuple(Vector2.zero), ConvertVectorToTuple(SpaceshipDesiredPos.position));
-    }
+    
     private Vector2 CartesianToPolar(Vector2 cart)
     {
         float a = cart.x;

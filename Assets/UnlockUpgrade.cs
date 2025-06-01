@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -21,7 +22,7 @@ public class UnlockUpgrade : MonoBehaviour
         {
             ps = GameObject.Find("SaveState").GetComponent<PlayerStats>();
         }
-        if (msm.AtStation)
+        if (msm.AtStation && !ps.UpgradedShip)
         {
             BuyMenu.SetActive(true);
         } 
@@ -38,7 +39,13 @@ public class UnlockUpgrade : MonoBehaviour
             {
                 ps.Scrap -= cost;
                 ps.UpgradedShip = true;
+                ps.TravelLocation = new Tuple<string, long, long, Tuple<float, float>, Tuple<float, float>>("UpgradeStation", 0, UnixTime.Now(), ConvertVectorToTuple(transform.position), ConvertVectorToTuple(transform.position));
             }
         }
+    }
+
+    private Tuple<float, float> ConvertVectorToTuple(Vector2 vector)
+    {
+        return new Tuple<float, float>(vector.x, vector.y);
     }
 }
